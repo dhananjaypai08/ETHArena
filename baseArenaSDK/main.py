@@ -6,9 +6,26 @@ import uvicorn
 import os 
 from dotenv import load_dotenv
 from baseAgent import normal_chat, structured_rag_output
+from web3 import Web3
+import json
+from eth_account import Account
+
 
 load_dotenv()
 api_key = os.environ.get("COHERE_API_KEY")
+private_key = os.environ.get("PRIVATE_KEY")
+contract_address = os.environ.get("CONTRACT_ADDRESS")
+rpc_url = os.environ.get("BASE_RPC_URL")
+
+
+w3 = Web3(Web3.HTTPProvider(rpc_url))
+with open("../contracts/artifacts/contracts/BaseArena.sol/BaseArena.json", "r") as f:
+    contract_abi = json.load(f)["abi"]
+contract = w3.eth.contract(address=contract_address, abi=contract_abi)
+account = Account.from_key(private_key)
+user_responses = {}
+# print(contract.functions.getAllUsers().call())
+# print(account.address, w3.eth.get_balance(account.address))
 
 app = FastAPI()
 origins = [
@@ -16,7 +33,7 @@ origins = [
     "http://localhost:8080",
     "http://localhost:8000",
     "http://localhost:3000",
-    "http://localhost:5000",
+    "http://localhost:5173",
     "*",
 ]
 app.add_middleware(
@@ -48,19 +65,41 @@ class GameData(BaseModel):
     bricks: List[GameObjectState]
     slingshot: SlingshotState
 
+documents =[]
+iteration = 0
+
 @app.post("/getUserData")
-async def receive_game_data(game_data: GameData):
+async def receive_game_data(walletAddress: str, game_data: GameData):
+    print(walletAddress)
     # Print for debugging
-    print("Received Data: ", game_data)
+    global iteration
+    
+    #print("Received Data: ", game_data)
 
     # Analyze data (this will later be handled by the AI)
     #print(game_data)
     analysis = analyze_gameplay(game_data)
     print(analysis)
-    prompt = "Give me a detailed and personalized feeedback on my Gameplay"
-    data = await normal_chat(prompt)
-    print(data)
-    return {"message": "Data received successfully", "aiagent": data}
+    analysis["data"] = game_data
+    global documents
+    documents.append(analysis)
+
+    if analysis["current_state"] == "Lost" or analysis["current_state"] == "Won":
+        prompt = "Give me a detailed and personalized feeedback on my Gameplay"
+        data = await structured_rag_output(prompt, documents)
+        json_data = data.strip('```json').strip('```')
+        data = json.loads(json_data)
+        print(data)
+        rewards_earned = data["Personalized Feeds"][0]["rewards earned"]
+        user_reputation = data["Personalized Feeds"][0]["user reputation"]
+        user_responses[walletAddress] = data
+        # data = json.load()
+        tx_hash = mint_onchain(rewards_earned, user_reputation, walletAddress)
+        documents = []
+        return {"message": "Data received successfully", "aiagent": data, "txn hash": tx_hash}
+    
+    return {"message": "Data received successfully"}
+  
 
 def analyze_gameplay(game_data: GameData):
     """
@@ -78,6 +117,47 @@ def analyze_gameplay(game_data: GameData):
         "current_state": game_data.currentGameState,
         "slingshot_state": game_data.slingshot.slingshotState,
     }
+
+def mint_onchain(rewards_earned: int, user_reputation: str, walletAddress: str):
+    nonce = w3.eth.get_transaction_count(account.address)
+    # data = "metadata testing"
+    # encoded_text = abi.encode(["string"], [data])
+    # BLOB_DATA = (b"\x00" * 32 * (4096 - len(encoded_text) // 32)) + encoded_text
+
+    tx = contract.functions.safeMint(rewards_earned, user_reputation, walletAddress).build_transaction({
+            "from": account.address,
+            "gas": 300000,  # Adjust gas based on network
+            "gasPrice": w3.eth.gas_price,
+            "nonce": nonce,
+    })
+
+    # Sign and Send Transaction
+    signed_tx = w3.eth.account.sign_transaction(tx, private_key)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        
+    print(f"Mint transaction sent! Tx Hash: {tx_hash.hex()}")
+    receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+    print(f"Transaction confirmed in block {receipt.blockNumber}")
+    return tx_hash.hex()
+
+def save_response_onchain(walletAddress : str, data: str):
+    nonce = w3.eth.get_transaction_count(account.address)
+    tx = contract.functions.saveResponse(walletAddress, data).build_transaction({
+            "from": account.address,
+            "gas": 3000,  # Adjust gas based on network
+            "gasPrice": w3.eth.gas_price,
+            "nonce": nonce,
+    })
+
+    # Sign and Send Transaction
+    signed_tx = w3.eth.account.sign_transaction(tx, private_key)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        
+    print(f"Mint transaction sent! Tx Hash: {tx_hash.hex()}")
+    receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+    print(f"Transaction confirmed in block {receipt.blockNumber}")
+    return tx_hash.hex()
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True, log_level="info")
