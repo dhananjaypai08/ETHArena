@@ -54,10 +54,13 @@ async def receive_game_data(game_data: GameData):
     print("Received Data: ", game_data)
 
     # Analyze data (this will later be handled by the AI)
-    print(game_data)
+    #print(game_data)
     analysis = analyze_gameplay(game_data)
     print(analysis)
-    return {"message": "Data received successfully", "analysis": analysis}
+    prompt = "Give me a detailed and personalized feeedback on my Gameplay"
+    data = await normal_chat(prompt)
+    print(data)
+    return {"message": "Data received successfully", "aiagent": data}
 
 def analyze_gameplay(game_data: GameData):
     """
