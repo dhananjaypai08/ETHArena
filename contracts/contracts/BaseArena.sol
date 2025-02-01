@@ -10,6 +10,7 @@ contract BaseArena is ERC721URIStorage, Ownable{
     mapping(address => uint256) public rewards_earned;
     mapping(address => uint256) public percentile;
     mapping(address => Game[]) public games_of_user;
+    mapping(address => string) public AIResponse;
     uint256 public tokenId;
     address[] public all_users;
 
@@ -47,6 +48,10 @@ contract BaseArena is ERC721URIStorage, Ownable{
     ) internal {
         require(from == address(0), "Err: token transfer is BLOCKED");   
         _beforeTokenTransfer(from, to, firstTokenId, batchSize);  
+    }
+
+    function saveResponse(address user, string memory data) public {
+        AIResponse[user] = data;
     }
 
 

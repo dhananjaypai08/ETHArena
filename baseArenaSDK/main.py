@@ -9,6 +9,7 @@ from baseAgent import normal_chat, structured_rag_output
 from web3 import Web3
 import json
 from eth_account import Account
+import requests
 
 
 load_dotenv()
@@ -95,6 +96,8 @@ async def receive_game_data(walletAddress: str, game_data: GameData):
         user_responses[walletAddress] = data
         # data = json.load()
         tx_hash = mint_onchain(rewards_earned, user_reputation, walletAddress)
+        image_url = image_to_text(analysis)
+        print(image_url)
         documents = []
         return {"message": "Data received successfully", "aiagent": data, "txn hash": tx_hash}
     
@@ -157,6 +160,17 @@ def save_response_onchain(walletAddress : str, data: str):
     receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
     print(f"Transaction confirmed in block {receipt.blockNumber}")
     return tx_hash.hex()
+
+def image_to_text(qualities: str):
+    text = "I want an anime of an angry bird pig with a clean blue background and the effects of face of the animated pig can be decided by you based for the NFT on this given user game data: "+str(qualities)
+    r = requests.post(
+    "https://api.deepai.org/api/text2img",
+    data={
+        'text': 'YOUR_TEXT_HERE',
+    },
+        headers={'api-key': os.environ.get("DEEPAI_API_KEY")}
+    )
+    return r.json()["output_url"]
 
 
 if __name__ == "__main__":
