@@ -6,6 +6,9 @@
 
 BaseArena is a modern platform designed with game developers and builders in mind. By combining the latest in Web3 technologies, interactive gaming analytics, and AI-driven insights, BaseArena offers a seamless environment to measure game improvements, earn on-chain rewards, manage gameplay data, and even create unique NFTs and game assets—all in a subtle, elegant manner.
 
+## Contract Deployment
+- Contract Deployment : [https://sepolia.basescan.org/address/0x5b6d2baad7d12ab324182ae6e27234052fb39479](https://sepolia.basescan.org/address/0x5b6d2baad7d12ab324182ae6e27234052fb39479)
+
 ## Table of Contents
 
 - [Problem Statement](#problem-statement)
