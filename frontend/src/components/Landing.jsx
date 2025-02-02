@@ -123,7 +123,7 @@ export const Landing = () => {
             </h1>
 
             <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-              Level up your Angry Birds gameplay with our AI coach built on Base. Get personalized feedback,
+              Level up your gameplay with our AI coach built on Base. Get personalized feedback,
               strategic insights, and game recommendations. It's like having a mini Jesse Pollak in your pocket,
               but with more bird-flinging advice!
             </p>
