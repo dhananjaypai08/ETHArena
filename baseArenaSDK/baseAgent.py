@@ -24,15 +24,17 @@ async def normal_chat(prompt: str):
                     - Include game recommendations, potential benefits, rewards, Game Scope (Amount of users who play and earn from it), Game popularity, Game reviews, Game ratings, Game genre, Game platform, Game developer, Game publisher, Game release date, Game price, Game features, game benefits in terms of money and tournaments
                     - Format response as a clean, informative JSON object
                     - The response should also contain a short Fun pun which should also boast about base network and should also give a fun fact about the user based on his game data and should include one individual from the base team. Find below the details of base(a blockchain company) individuals
-                    - Along with this it should also give a Name of the doppleganger or best partner / individual best suited for the user based on his game data from the below given individuals
+                    - Along with this it should also give a Name of the doppleganger or best partner / individual best suited for the user based on his game data from the below given individuals and also the reasoning on why that doppleganger is best suited for the user
                     - {
                         "name": "Jesse Pollak","description": "He is builder #001 of base and is looking to onboard everyone onchain and create a global economy by building base. Loves to go out on the street and offer on-chain money to randoms. He loves to give out money and bring people onchain and is a fun guy",
+                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
                         "name": "Saxena Saheb", "description": "The most hardworking and fun guy but sometimes looks very serious and he is on a mission to make builders build cool stuff and help base grow",
                         "name": "David Tso", "description": "He is the most fun guy in the base team and is an Ecosystem manager at Base",
                         "name": "Denver Dsouza", "description": "He is the guy who started Devfolio(A hackathon platform which supports tons of developers around the world). He is hard working and focused on the Indian builders to build cool stuff that are also impactful",
                         "name": "Kabir", ""description": "He is the guy who does the multi tasking stuff for the community, He handles strategy, operations and grants to empower builders to build consumer facing products",
                         "name": "Nader Dabit","description": "AI Agent and Finance enthusiast and he is the goat of dev rel and currently works at Eigen labs",
                     }
+                    - Change your puns response every single time with new twists
                     - For every single response, Include the 'overall performance', 'user reputation', 'recommendation for games based on his capabilities that can earn him rewards', 'estimate rewards', 'game genre'
                     - Don't give 'None' or 'N/A' as a response for anything, if you don't have the data, just search the internet and give the latest data for it and don't ever give `None` as a response for any field or worst case just mock some appropriate data
                     
@@ -43,21 +45,20 @@ async def normal_chat(prompt: str):
                         "overall performance": "string",
                         "Personalized Feeds": [
                             {
-                                "rewards earned": 1,
+                                "rewards earned": integer, #value should strictly be in between 0 to 10 and without any units just the number
                                 "user reputation": "string",
                                 "percentile": "string",
-                                "onchain footprints": "string",
+                                "onchain footprints": "string", # some mocked data in between 0-5
                                 "game genres": ["string"]
                             }
                         ],
                         "game download links": "string",
-                        "estimated rewards": "string",
+                        "estimated rewards": "string", # the generated value should be strictly in between 0 and 100000
                         "accuracy": "string",
                         "overall_benefit": "string",
                         "recommended games for esports players": [
-                            "game name": "string"
-                            "game scope": "string",
-                            "game popularity": "string",
+                            "game scope": "string", # the generated value should be strictly in between 0 and 10
+                            "game popularity": "string", #value should be in between 0 to 10
                             "game benefits in terms of money and tournaments": "string"
                         ]
                     }

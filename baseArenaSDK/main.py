@@ -113,7 +113,12 @@ async def receive_game_data(walletAddress: str, game_data: GameData):
 @app.get("/getAIResponse")
 async def getAIResponse(walletAddress: str):
     if not user_responses.get(walletAddress):
-        return {'fun pun': "You're a real slingshot hero! Your accuracy is on point, but watch out for those tricky pigs.", 'gamer match/doppleganger': 'David Tso', 'overall performance': "You're a skilled player with a keen eye for accuracy. Your slingshot skills are impressive, but those pigs are a tough bunch.", 'Personalized Feeds': [{'rewards earned': 7, 'user reputation': 'Slingshot Superstar', 'percentile': '90th', 'onchain footprints': 4, 'game genres': ['Arcade', 'Casual']}], 'game download links': 'https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en&gl=US', 'estimated rewards': 15000, 'accuracy': '90%', 'overall_benefit': "You're a natural at this game, and your accuracy is a real asset. Keep practicing, and you'll be a slingshot master in no time!", 'recommended games for esports players': [{'game scope': 8, 'game popularity': 8, 'game benefits in terms of money and tournaments': "This game is a great choice for esports players, as it offers a wide range of tournaments and competitions with substantial cash prizes. It's a popular choice for gamers looking to earn rewards and build their reputation in the gaming community."}]}
+        json_data = normal_chat("Generate a mock data and tell the user to play more games with the same expected output")
+        json_data = data.strip('```json').strip('```')
+        print(json_data)
+        data = json.loads(json_data)
+        return data
+        
     return user_responses.get(walletAddress)
   
 
