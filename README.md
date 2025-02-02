@@ -1,7 +1,6 @@
 # BaseArena
 - Your Gaming AI companion to help you level up your game
-
-Below is an example of a refined `README.md` that subtly emphasizes the integration of Web3 technologies, gaming, and AI agents while outlining the purpose and details of **BaseArena**.
+- An ERC2771 compatible aggregated SDK with AI Based NFT generation based on gameplay
 
 ---
 
@@ -112,8 +111,6 @@ BaseArena provides a thoughtful integration of three core elements:
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 3. **Configure Environment Variables:**  
@@ -122,9 +119,7 @@ BaseArena provides a thoughtful integration of three core elements:
 4. **Start the Application:**
 
    ```bash
-   npm start
-   # or
-   yarn start
+   npm run dev
    ```
 
 5. **Integrate the SDK:**  
