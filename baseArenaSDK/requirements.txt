@@ -14,15 +14,6 @@ ckzg==2.0.1
 click==8.1.8
 cohere==5.13.11
 cytoolz==0.12.3
-eth-account==0.10.0
-eth-accounts==20191227
-eth-hash==0.7.1
-eth-keyfile==0.9.0
-eth-keys==0.6.1
-eth-rlp==1.0.1
-eth-typing==5.1.0
-eth-utils==5.2.0
-eth_abi==5.2.0
 fastapi==0.115.8
 fastavro==1.10.0
 filelock==3.17.0
