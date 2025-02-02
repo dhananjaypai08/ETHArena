@@ -20,7 +20,7 @@ rpc_url = os.environ.get("BASE_RPC_URL")
 
 
 w3 = Web3(Web3.HTTPProvider(rpc_url))
-with open("../contracts/artifacts/contracts/BaseArena.sol/BaseArena.json", "r") as f:
+with open("./contracts/BaseArena.json", "r") as f:
     contract_abi = json.load(f)["abi"]
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 account = Account.from_key(private_key)
