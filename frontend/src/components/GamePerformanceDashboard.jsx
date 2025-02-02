@@ -135,7 +135,7 @@ export const GamePerformanceDashboard = () => {
         if (!address) return;
         const walletAddress = address.toString();
         const response = await axios.get(
-          `https://basearena.onrender.com/getAIResponse?walletAddress=${walletAddress}`
+          `http://localhost:8000/getAIResponse?walletAddress=${walletAddress}`
         );
         // The API returns an object keyed by wallet addresses.
         // To simplify front-end access, extract the inner object for the current wallet.
