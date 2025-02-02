@@ -69,6 +69,11 @@ class GameData(BaseModel):
 documents =[]
 iteration = 0
 
+@app.get("/")
+async def test():
+    return {"Hello": "dj"}
+
+
 @app.post("/getUserData")
 async def receive_game_data(walletAddress: str, game_data: GameData):
     print(walletAddress)
