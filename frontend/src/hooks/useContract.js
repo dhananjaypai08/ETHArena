@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Contract, JsonRpcProvider, BrowserProvider } from 'ethers';
 import { useAccount, useWalletClient } from 'wagmi';
-import abi from '../../../contracts/artifacts/contracts/BaseArena.sol/BaseArena.json';
+import abi from '../contracts/BaseArena.json';
 
 const CONTRACT_ADDRESS = "0x5b6d2bAaD7d12Ab324182aE6e27234052fB39479";
 
