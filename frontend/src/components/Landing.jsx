@@ -130,18 +130,18 @@ export const Landing = () => {
 
             <div className="flex justify-center gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button onClick={() => navigate('/play')} className="group">
-                  <span>Start Playing</span>
+                <Button onClick={() => navigate('/performance')} className="group">
+                  <span>AI Companion</span>
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button 
-                  onClick={() => navigate('/profile')}
+                  onClick={() => navigate('/gaming')}
                   variant="secondary"
                   className="group border border-violet-500/20 hover:border-violet-500/50"
                 >
-                  <span>View Progress</span>
+                  <span>View On-chain Reputation</span>
                   <Bird className="w-4 h-4 ml-2 opacity-50 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </motion.div>

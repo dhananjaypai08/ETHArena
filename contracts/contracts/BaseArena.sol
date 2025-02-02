@@ -9,23 +9,25 @@ contract BaseArena is ERC721URIStorage, Ownable{
     mapping(address => uint256) public reputation_score;
     mapping(address => uint256) public rewards_earned;
     mapping(address => uint256) public percentile;
-    mapping(address => Game[]) public games_of_user;
+    mapping(address => BARNNFT[]) public games_of_user;
     mapping(address => string) public AIResponse;
     uint256 public tokenId;
     address[] public all_users;
 
-    struct Game{
-        address user;
-        uint256 reputationScore;
-        uint256 rewardsEarned;
-        string oneLiner;
+    struct BARNNFT {
+        address owner;
+        uint256 reputation_score;
+        uint256 ai_rewards;
+        string image_asset;
+        string doppleganger_asset;
+        uint256 tokenId;
     }
 
 
     constructor() ERC721("BaseArena", "BARN") Ownable(msg.sender){}
 
 
-    function safeMint(uint256 rewards_earnedUser, string memory uri,  address to) public {
+    function safeMint(uint256 rewards_earnedUser, string memory uri, string memory dopplegangeruri,  address to) public {
         reputation_score[to] += 1;
         rewards_earned[to] += rewards_earnedUser;
         tokenId++;
@@ -33,7 +35,8 @@ contract BaseArena is ERC721URIStorage, Ownable{
         _setTokenURI(tokenId, uri);
 
         all_users.push(to);
-
+        BARNNFT memory newBarnnft = BARNNFT(to, reputation_score[to], rewards_earned[to], uri, dopplegangeruri, tokenId);
+        games_of_user[to].push(newBarnnft);
     }
 
     function getAllUsers() public view returns(address[] memory){
@@ -52,6 +55,10 @@ contract BaseArena is ERC721URIStorage, Ownable{
 
     function saveResponse(address user, string memory data) public {
         AIResponse[user] = data;
+    }
+
+    function getNFTs(address user) public view returns(BARNNFT[] memory){
+        return games_of_user[user];
     }
 
 

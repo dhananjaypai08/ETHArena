@@ -10,9 +10,17 @@ export const Navbar = () => (
           BaseArena
         </Link>
         <div className="flex items-center gap-6">
-          
+        <Link to="/performance" className="text-gray-300 hover:text-white">
+          <User2Icon/>
+            Game Advisor
+          </Link>
+
+          <Link to="/marketplace" className="text-gray-300 hover:text-white">
+          <User2Icon/>
+            View all AI generated NFT's
+          </Link>
          
-          <Link to="/reputation" className="text-gray-300 hover:text-white">
+          <Link to="/gaming" className="text-gray-300 hover:text-white">
           <ChartAreaIcon/>
             On-chain Game Reputation
           </Link>

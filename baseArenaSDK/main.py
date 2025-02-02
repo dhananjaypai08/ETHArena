@@ -89,19 +89,26 @@ async def receive_game_data(walletAddress: str, game_data: GameData):
         prompt = "Give me a detailed and personalized feeedback on my Gameplay"
         data = await structured_rag_output(prompt, documents)
         json_data = data.strip('```json').strip('```')
+        print(json_data)
         data = json.loads(json_data)
-        print(data)
+        #print(data)
         rewards_earned = data["Personalized Feeds"][0]["rewards earned"]
         user_reputation = data["Personalized Feeds"][0]["user reputation"]
         user_responses[walletAddress] = data
-        # data = json.load()
-        tx_hash = mint_onchain(rewards_earned, user_reputation, walletAddress)
-        image_url = image_to_text(analysis)
+        image_url = image_to_text(rewards_earned)
         print(image_url)
+        # data = json.load()
+        tx_hash = mint_onchain(rewards_earned, image_url, image_url, walletAddress)
+    
         documents = []
         return {"message": "Data received successfully", "aiagent": data, "txn hash": tx_hash}
     
     return {"message": "Data received successfully"}
+
+@app.get("/getAIResponse")
+async def getAIResponse(walletAddress: str):
+    print(user_responses)
+    return user_responses.get(walletAddress)
   
 
 def analyze_gameplay(game_data: GameData):
@@ -121,15 +128,24 @@ def analyze_gameplay(game_data: GameData):
         "slingshot_state": game_data.slingshot.slingshotState,
     }
 
-def mint_onchain(rewards_earned: int, user_reputation: str, walletAddress: str):
+def mint_onchain(rewards_earned: int, image_uri: str, doppleganger_uri: str, walletAddress: str):
     nonce = w3.eth.get_transaction_count(account.address)
     # data = "metadata testing"
     # encoded_text = abi.encode(["string"], [data])
     # BLOB_DATA = (b"\x00" * 32 * (4096 - len(encoded_text) // 32)) + encoded_text
 
-    tx = contract.functions.safeMint(rewards_earned, user_reputation, walletAddress).build_transaction({
+    estimated_gas = contract.functions.safeMint(rewards_earned, image_uri, doppleganger_uri, walletAddress).estimate_gas({
+            "from": account.address
+    })
+    print("Estimated Gas:", estimated_gas)
+        
+        # Add a safety buffer to the gas estimate
+    gas_limit = int(estimated_gas * 1.3)
+    print("Using Gas Limit:", gas_limit)
+
+    tx = contract.functions.safeMint(rewards_earned, image_uri, doppleganger_uri, walletAddress).build_transaction({
             "from": account.address,
-            "gas": 300000,  # Adjust gas based on network
+            "gas": gas_limit,  # Adjust gas based on network
             "gasPrice": w3.eth.gas_price,
             "nonce": nonce,
     })
@@ -145,9 +161,10 @@ def mint_onchain(rewards_earned: int, user_reputation: str, walletAddress: str):
 
 def save_response_onchain(walletAddress : str, data: str):
     nonce = w3.eth.get_transaction_count(account.address)
+    
     tx = contract.functions.saveResponse(walletAddress, data).build_transaction({
             "from": account.address,
-            "gas": 3000,  # Adjust gas based on network
+            "gas": 3100,  # Adjust gas based on network
             "gasPrice": w3.eth.gas_price,
             "nonce": nonce,
     })
@@ -161,16 +178,16 @@ def save_response_onchain(walletAddress : str, data: str):
     print(f"Transaction confirmed in block {receipt.blockNumber}")
     return tx_hash.hex()
 
-def image_to_text(qualities: str):
-    text = "I want an anime of an angry bird pig with a clean blue background and the effects of face of the animated pig can be decided by you based for the NFT on this given user game data: "+str(qualities)
+def image_to_text(rewards: int):
+    text = f"The given data : {str(rewards)}. If the given data value is above 5 then generate an animated angry bird with good facial expression and a sword  and plain red background. If the given data is less than 5 than generate an sad animated angry bird with yellow background color. Keep it plain and simple and with facial expressions and a Sword in hand" 
     r = requests.post(
     "https://api.deepai.org/api/text2img",
     data={
-        'text': 'YOUR_TEXT_HERE',
+        'text': text,
     },
-        headers={'api-key': os.environ.get("DEEPAI_API_KEY")}
+        headers={'api-key': os.environ.get("DEEPAI_API_KEY")},
     )
-    return r.json()["output_url"]
+    return r.json()["share_url"]
 
 
 if __name__ == "__main__":

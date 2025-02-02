@@ -1,19 +1,18 @@
 // src/hooks/useContract.js
 import { useEffect, useState } from 'react';
 import { Contract, JsonRpcProvider, BrowserProvider } from 'ethers';
-import { Signer } from "@lens-network/sdk/ethers";
 import { useAccount, useWalletClient } from 'wagmi';
-import abi from '../contracts/BookIt.json';
+import abi from '../../../contracts/artifacts/contracts/BaseArena.sol/BaseArena.json';
 
-const CONTRACT_ADDRESS = "0xdB023ADd0dEFF974d03D184173c5CDd60C25cA86";
-const LENS_SEPOLIA_CHAIN_ID = 37111;
+const CONTRACT_ADDRESS = "0x5b6d2bAaD7d12Ab324182aE6e27234052fB39479";
 
 export function useContract() {
     const { address, isConnected } = useAccount();
     const { data: walletClient } = useWalletClient();
     const [contract, setContract] = useState(null);
     const [signer, setSigner] = useState(null);
-
+    const [provider, setProvider] = useState(null);
+ 
     useEffect(() => {
         const initContract = async () => {
             if (isConnected && walletClient && address) {
@@ -27,6 +26,7 @@ export function useContract() {
                     const provider = new BrowserProvider(window.ethereum);
                     const signer = await provider.getSigner();
                     setSigner(signer);
+                    setProvider(provider);
                     console.log(signer, provider);
                     // Create contract instance with signer
                     const contractInstance = new Contract(
@@ -49,5 +49,5 @@ export function useContract() {
         initContract();
     }, [isConnected, walletClient, address]);
 
-    return { contract, address, isConnected, signer };
+    return { contract, address, isConnected, signer, provider };
 }
