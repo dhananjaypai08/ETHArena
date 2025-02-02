@@ -114,7 +114,7 @@ async def receive_game_data(walletAddress: str, game_data: GameData):
 async def getAIResponse(walletAddress: str):
     if not user_responses.get(walletAddress):
         json_data = normal_chat("Generate a mock data and tell the user to play more games with the same expected output")
-        json_data = data.strip('```json').strip('```')
+        json_data = json_data.strip('```json').strip('```')
         print(json_data)
         data = json.loads(json_data)
         return data
