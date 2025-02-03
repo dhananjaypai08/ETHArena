@@ -22,40 +22,19 @@ export const NFTMarketplace = () => {
   const [loadingStates, setLoadingStates] = useState({});
   
   // Use ConnectKit's hooks instead of custom connection logic
- const { contract, address, isConnected, signer, provider } = useContract(); 
-
- const parseNFTData = (nftData) => {
-    // If the data is an array-like object, convert it to a proper array
-    const dataArray = Array.from(nftData);
-    
-    return dataArray.map((item, key) => {
-      // If the item is a proxy, get its underlying properties
-      console.log(item);
-      const nft = Object.assign({}, item);
-      console.log(nft);
-      // Convert BigNumber values to strings
-      return {
-        tokenId: nft.tokenId?.toString() || '',
-        owner: nft.owner || '',
-        image_asset: nft.image_asset || '',
-        reputation_score: nft.reputation_score?.toString() || '0',
-        ai_rewards: nft.ai_rewards?.toString() || '0',
-        // Add any other properties your NFT has
-      };
-    });
-  };
+ const { contract, address, isConnected, signer } = useContract(); 
 
   // Fetch NFTs based on view mode
   useEffect(() => {
     const fetchNFTs = async () => {
       if (!contract || !isConnected) return;
-      
+      let allNFTS = [];
       setLoading(true);
       try {
         if (viewMode === 'personal') {
           const userNFTs = await contract.getNFTs(address);
           console.log(userNFTs);
-          let allNFTS = []
+          
           for(let i=0;i<userNFTs.length;i++){
             const data = {
                 "owner": userNFTs[i][0],
@@ -77,7 +56,7 @@ export const NFTMarketplace = () => {
           
           for (const addr of uniqueAddresses) {
             const userNFTs = await contract.getNFTs(addr);
-            let allNFTS = []
+            
             for(let i=0;i<userNFTs.length;i++){
                 const data = {
                     "owner": userNFTs[i][0],

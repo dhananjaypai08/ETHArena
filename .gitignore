@@ -1,6 +1,8 @@
-baseArenaSDK/.env
+# git ignore
 frontend/.env
 baseArenaSDK/__pycache__/
 frontend/node_modules/
 baseArenaSDK/env/
+baseArenaSDK/.env
 AngryBirdsStyleGame/
+**/.env

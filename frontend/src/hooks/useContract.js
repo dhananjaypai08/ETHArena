@@ -49,5 +49,5 @@ export function useContract() {
         initContract();
     }, [isConnected, walletClient, address]);
 
-    return { contract, address, isConnected, signer, provider };
+    return { contract, address, isConnected, signer };
 }
