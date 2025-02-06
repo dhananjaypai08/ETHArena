@@ -47,45 +47,45 @@ export const Landing = () => {
   const features = [
     {
       icon: Brain,
-      title: "AI-Powered Analysis",
-      description: "Get personalized feedback on your bird-flinging skills from our smart AI coach. It's like having Jesse Pollak watching your game, but with fewer Base puns!",
-      techDetail: "Advanced ML models analyzing player trajectories on Base L2"
+      title: "AI-Powered Gaming Evolution",
+      description: "Transform your gameplay with intelligent AI agents that turn every move into a strategic masterpiece. We're not just playing games, we're rewriting the blockchain gaming rulebook!",
+      techDetail: "RAG-based AI analysis with Ethereum-powered insights"
     },
     {
       icon: Trophy,
-      title: "Skill Progression System",
-      description: "Level up your gaming skills with detailed analytics and recommendations. We're not as generous as Jesse with Base grants, but we're close!",
-      techDetail: "Real-time performance tracking and achievement system"
+      title: "On-Chain Reputation System",
+      description: "Earn, track, and showcase your gaming prowess. Your skills are no longer just pixels—they're permanent, verifiable achievements on the blockchain.",
+      techDetail: "Decentralized reputation tracking across game engines"
     },
     {
       icon: Rocket,
-      title: "Game Discovery Engine",
-      description: "Discover new AI-enhanced games based on your playing style. More addictive than watching Jesse's Base presentations!",
-      techDetail: "Personalized game recommendations using Base protocol"
+      title: "NFT Gameplay Forge",
+      description: "Every game moment becomes a unique, AI-generated NFT. Your gaming journey isn't just played—it's minted, traded, and celebrated!",
+      techDetail: "DeepAI NFT generation based on real-time gameplay"
     },
     {
       icon: Target,
-      title: "Strategic Insights",
-      description: "Learn optimal strategies and get better at destroying those pesky pig fortresses. Built on Base, because pigs deserve L2 efficiency!",
-      techDetail: "Advanced pattern recognition for gameplay optimization"
+      title: "Cross-Engine Gaming Nexus",
+      description: "One SDK to rule them all. Seamlessly integrate blockchain rewards across Unity, Unreal, Godot, and beyond. Your game, your rules, our tech!",
+      techDetail: "Account abstraction with ERC2771 technology"
     }
   ];
 
   const stats = [
     {
-      value: "100ms",
-      label: "AI Response Time",
-      description: "Faster than a Base transaction!"
+      value: "3.2B+",
+      label: "Global Gaming Reach",
+      description: "Potential users waiting to go on-chain"
     },
     {
       value: "1000+",
       label: "Game Patterns",
-      description: "Analyzed by our AI coach"
+      description: "AI-powered performance insights"
     },
     {
-      value: "24/7",
-      label: "Gaming Support",
-      description: "Unlike Jesse's pun supply"
+      value: "∞",
+      label: "Gaming Possibilities",
+      description: "Your blockchain gaming future"
     }
   ];
 
@@ -114,24 +114,24 @@ export const Landing = () => {
 
             <h1 className="text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
-                Master the Fling
+                Steam, Meet
               </span>
               <br />
               <span className="bg-gradient-to-r from-pink-500 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
-                with AI
+                Blockchain
               </span>
             </h1>
 
             <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-              Level up your gameplay with our AI coach built on Base. Get personalized feedback,
-              strategic insights, and game recommendations. It's like having a mini Jesse Pollak in your pocket,
-              but with more bird-flinging advice!
+              Welcome to ETHArena—where your gaming skills mint wealth, your achievements become NFTs, 
+              and every play transforms into a blockchain-powered narrative. We're not just disrupting gaming; 
+              we're creating a whole new metaverse of play-to-earn possibilities!
             </p>
 
             <div className="flex justify-center gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button onClick={() => navigate('/performance')} className="group">
-                  <span>AI Companion</span>
+                  <span>AI Gaming Companion</span>
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </motion.div>
@@ -141,7 +141,7 @@ export const Landing = () => {
                   variant="secondary"
                   className="group border border-violet-500/20 hover:border-violet-500/50"
                 >
-                  <span>View On-chain Reputation</span>
+                  <span>View On-Chain Reputation</span>
                   <Bird className="w-4 h-4 ml-2 opacity-50 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </motion.div>
@@ -158,16 +158,16 @@ export const Landing = () => {
             <Card glowing className="border border-violet-500/20">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 text-center">
                 <div>
-                  <p className="text-violet-400 font-medium">AI Analysis</p>
-                  <p className="text-gray-400 mt-1">Real-time gameplay feedback</p>
+                  <p className="text-violet-400 font-medium">AI Agents</p>
+                  <p className="text-gray-400 mt-1">Smart gaming companions</p>
                 </div>
                 <div>
-                  <p className="text-violet-400 font-medium">Base Powered</p>
-                  <p className="text-gray-400 mt-1">L2 speed, L1 security</p>
+                  <p className="text-violet-400 font-medium">Web3 Native</p>
+                  <p className="text-gray-400 mt-1">Blockchain-powered gaming</p>
                 </div>
                 <div>
                   <p className="text-violet-400 font-medium">Game Discovery</p>
-                  <p className="text-gray-400 mt-1">Personalized recommendations</p>
+                  <p className="text-gray-400 mt-1">Cross-engine recommendations</p>
                 </div>
               </div>
             </Card>
@@ -193,7 +193,7 @@ export const Landing = () => {
           >
             <Card glowing className="border border-violet-500/20">
               <h3 className="text-2xl font-bold text-center pt-8 mb-8">
-                Platform Features
+                Platform Potential
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {stats.map((stat, index) => (

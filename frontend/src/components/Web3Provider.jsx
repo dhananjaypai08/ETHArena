@@ -4,22 +4,22 @@ import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
-const baseSepolia = {
-  id: 84532,
-  name: "Base Sepolia Testnet",
+const arbitrumSepolia = {
+  id: 421614,
+  name: "Arbitrum Sepolia Testnet",
   nativeCurrency: {name: 'Ether', symbol: 'ETH', decimals: 18},
   rpcUrls: {
-    default: { http : ["https://rpc.ankr.com/base_sepolia"] }
+    default: { http : ["https://endpoints.omniatech.io/v1/arbitrum/sepolia/public"] }
   },
   blockExplorers: {
-    default: { name: 'Base Sepolia Testnet Explorer', url: "https://sepolia-explorer.base.org" }
+    default: { name: 'Arbitrum Sepolia Testnet Explorer', url: "https://sepolia.arbiscan.io/" }
   },
 }
 
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [baseSepolia],
+    chains: [arbitrumSepolia],
     // transports: {
     //   // RPC URL for each chain
     //   [polygonZkEvmCardona.id]: http(
@@ -34,7 +34,7 @@ const config = createConfig(
     appName: "DJWallet",
 
     // Optional App Info
-    appDescription: "BaseArena",
+    appDescription: "ETHArena",
     appUrl: "https://family.co", // your app's url
     appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
   }),

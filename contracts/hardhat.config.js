@@ -8,14 +8,12 @@ module.exports = {
   networks: {
     // ...
 
-    baseSepolia: {
-      chainId: 84532,
-      ethNetwork: "base sepolia",
-      url: "https://sepolia.base.org",
-      // verifyURL:
-      //   "https://block-explorer-verify.testnet.lens.dev/contract_verification",
+    arbitrumSepolia : {
+      chainId: 421614,
+      ethNetwork: "arbitrum sepolia",
+      url: "https://sepolia-rollup.arbitrum.io/rpc",
       accounts: [`0x${process.env.PRIVATE_KEY}`]
-    },
+    }
 
     // hardhat: {
     //   zksync: true,

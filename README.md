@@ -1,4 +1,4 @@
-# BaseArena
+# ETHArena
 - Your Gaming AI companion to help you level up your game
 - An ERC2771 compatible aggregated SDK with AI Based NFT generation based on gameplay
 
