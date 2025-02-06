@@ -6,7 +6,7 @@ import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
 const arbitrumSepolia = {
   id: 421614,
-  name: "Arbitrum Sepolia Testnet",
+  name: "Arbitrum Sepolia",
   nativeCurrency: {name: 'Ether', symbol: 'ETH', decimals: 18},
   rpcUrls: {
     default: { http : ["https://arbitrum-sepolia.infura.io/v3/2WCbZ8YpmuPxUtM6PzbFOfY5k4B"] }

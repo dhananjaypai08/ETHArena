@@ -264,7 +264,7 @@ export const NFTMarketplace = () => {
 
                           {transactions[nft.tokenId] && (
                             <a
-                              href={`https://sepolia.basescan.org/tx/${transactions[nft.tokenId]}`}
+                              href={`https://sepolia.arbiscan.io/tx/${transactions[nft.tokenId]}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center justify-center text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
