@@ -4,7 +4,7 @@ import { Contract, JsonRpcProvider, BrowserProvider } from 'ethers';
 import { useAccount, useWalletClient } from 'wagmi';
 import abi from '../contracts/BaseArena.json';
 
-const CONTRACT_ADDRESS = "0x5b6d2bAaD7d12Ab324182aE6e27234052fB39479";
+const CONTRACT_ADDRESS = "0x66f0c4C9a21B78D4D92358D087176964982e1c21";
 
 export function useContract() {
     const { address, isConnected } = useAccount();
