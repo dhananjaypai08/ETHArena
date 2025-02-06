@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import uvicorn
 import os 
 from dotenv import load_dotenv
-from baseAgent import normal_chat, structured_rag_output
+from baseAgent import normal_chat, structured_rag_output, structured_rag_response
 from web3 import Web3
 import json
 from eth_account import Account
@@ -75,8 +75,9 @@ async def test():
 
 
 @app.post("/getUserData")
-async def receive_game_data(walletAddress: str, game_data: GameData):
-    print(walletAddress)
+async def receive_game_data(walletAddress: str, request: Request):
+    data = await request.json()
+    #print(walletAddress, data)
     # Print for debugging
     global iteration
     
@@ -84,15 +85,15 @@ async def receive_game_data(walletAddress: str, game_data: GameData):
 
     # Analyze data (this will later be handled by the AI)
     #print(game_data)
-    analysis = analyze_gameplay(game_data)
-    print(analysis)
-    analysis["data"] = game_data
+    # analysis = analyze_gameplay(game_data)
+    # print(analysis)
+    # analysis["data"] = game_data
     global documents
-    documents.append(analysis)
+    documents.append(data)
 
-    if analysis["current_state"] == "Lost" or analysis["current_state"] == "Won":
+    if data["currentGameState"] == "Lost" or data["currentGameState"] == "Won":
         prompt = "Give me a detailed and personalized feeedback on my Gameplay"
-        data = await structured_rag_output(prompt, documents)
+        data = await structured_rag_response(prompt, documents)
         json_data = data.strip('```json').strip('```')
         print(json_data)
         data = json.loads(json_data)
@@ -100,6 +101,7 @@ async def receive_game_data(walletAddress: str, game_data: GameData):
         rewards_earned = data["Personalized Feeds"][0]["rewards earned"]
         user_reputation = data["Personalized Feeds"][0]["user reputation"]
         user_responses[walletAddress] = data
+        print(rewards_earned, user_reputation)
         image_url = image_to_text(rewards_earned)
         print(image_url)
         # data = json.load()
@@ -120,7 +122,30 @@ async def getAIResponse(walletAddress: str):
         return data
         
     return user_responses.get(walletAddress)
-  
+
+@app.get("/chat")
+async def prompt(request: Request):
+    body = await request.json()
+    prompt = body["prompt"]
+    print(f"Input prompt : {prompt}")
+    api_key = os.environ.get("GAIA_API_KEY")
+    url = "https://0x0c8923d457934eae1a4ce708f07a980f1ce57a32.gaia.domains/v1/chat/completions"
+    headers = {
+    "accept": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {api_key}"
+    }
+    data = {
+    "messages": [
+        {"role": "system", "content": "You are an helpful assistant that analyzes uniswap data and provides insights"},
+        {"role": "user", "content": prompt}
+    ],
+    "model": "llama-3.2-3B-Instruct"
+    }
+    response = requests.post(url, json=data, headers=headers)
+    data = response.json()
+    print(data)
+    return data['choices'][0]['message']['content']
 
 def analyze_gameplay(game_data: GameData):
     """
@@ -199,6 +224,7 @@ def image_to_text(rewards: int):
         headers={'api-key': os.environ.get("DEEPAI_API_KEY")},
     )
     return r.json()["share_url"]
+
 
 
 if __name__ == "__main__":
