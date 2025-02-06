@@ -184,7 +184,7 @@ async def structured_rag_response(prompt : str, documents: list):
                     - Change your puns response every single time with new twists
                     - For every single response, Include the 'overall performance', 'user reputation', 'recommendation for games based on his capabilities that can earn him rewards', 'estimate rewards', 'game genre'
                     - Don't give 'None' or 'N/A' as a response for anything, if you don't have the data, just search the internet and give the latest data for it and don't ever give `None` as a response for any field or worst case just mock some appropriate data
-                    
+                    - Only give the structured JSON Response in JSON format Only and please don't give any other response except the JSON response
                     
                     Required JSON Structure:
                     {
@@ -211,7 +211,7 @@ async def structured_rag_response(prompt : str, documents: list):
                         ]
                     }
 
-                    - Only give the structured JSON Response and please don't give any other response except the JSON response
+                    
                 """
             },
             {"role": "user", "content": final_prompt}
