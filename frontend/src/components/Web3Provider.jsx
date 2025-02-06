@@ -9,7 +9,7 @@ const arbitrumSepolia = {
   name: "Arbitrum Sepolia Testnet",
   nativeCurrency: {name: 'Ether', symbol: 'ETH', decimals: 18},
   rpcUrls: {
-    default: { http : ["https://endpoints.omniatech.io/v1/arbitrum/sepolia/public"] }
+    default: { http : ["https://arbitrum-sepolia.infura.io/v3/2WCbZ8YpmuPxUtM6PzbFOfY5k4B"] }
   },
   blockExplorers: {
     default: { name: 'Arbitrum Sepolia Testnet Explorer', url: "https://sepolia.arbiscan.io/" }

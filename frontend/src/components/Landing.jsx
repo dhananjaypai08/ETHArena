@@ -114,11 +114,11 @@ export const Landing = () => {
 
             <h1 className="text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
-                Steam, Meet
+              Master the Fling
               </span>
               <br />
               <span className="bg-gradient-to-r from-pink-500 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
-                Blockchain
+              with AI
               </span>
             </h1>
 
