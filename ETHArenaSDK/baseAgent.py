@@ -186,6 +186,11 @@ async def structured_rag_response(prompt : str, documents: list):
                     - Don't give 'None' or 'N/A' as a response for anything, if you don't have the data, just search the internet and give the latest data for it and don't ever give `None` as a response for any field or worst case just mock some appropriate data
                     - Only give the structured JSON Response in JSON format Only and please don't give any other response except the JSON response
                     
+                    Strict Instructions : 
+                        1. Response Type : JSON Structure
+                        2. No additional data to be present in the response expect the JSON Response
+                        3. Only give the appropriate JSON Response
+                    
                     Required JSON Structure:
                     {
                         "fun pun": "string",
