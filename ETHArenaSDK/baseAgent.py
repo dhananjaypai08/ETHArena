@@ -166,7 +166,6 @@ async def structured_rag_output(prompt: str, documents: list):
     
 async def structured_rag_response(prompt : str, documents: list):
     rag_doc = str(documents)
-    print(rag_doc)
     try:
         url = "https://0x0c8923d457934eae1a4ce708f07a980f1ce57a32.gaia.domains/v1/chat/completions"
         headers = {
