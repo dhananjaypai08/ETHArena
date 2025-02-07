@@ -14,6 +14,9 @@ contract BaseArena is ERC721URIStorage, Ownable{
     uint256 public tokenId;
     address[] public all_users;
 
+    event mint(address to, string uri);
+    event reward_add(address user, uint256 score);
+
     struct BARNNFT {
         address owner;
         uint256 reputation_score;
@@ -33,7 +36,8 @@ contract BaseArena is ERC721URIStorage, Ownable{
         tokenId++;
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
-
+        emit reward_add(to, rewards_earnedUser);
+        emit mint(to, uri);
         all_users.push(to);
         BARNNFT memory newBarnnft = BARNNFT(to, reputation_score[to], rewards_earned[to], uri, dopplegangeruri, tokenId);
         games_of_user[to].push(newBarnnft);
