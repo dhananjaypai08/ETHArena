@@ -13,7 +13,6 @@ import requests
 
 
 load_dotenv()
-api_key = os.environ.get("COHERE_API_KEY")
 private_key = os.environ.get("PRIVATE_KEY")
 contract_address = os.environ.get("CONTRACT_ADDRESS")
 rpc_url = os.environ.get("BASE_RPC_URL")
@@ -216,7 +215,10 @@ def save_response_onchain(walletAddress : str, data: str):
     return tx_hash.hex()
 
 def image_to_text(rewards: int):
-    text = f"The given data : {str(rewards)}. If the given data value is above 5 then generate an animated angry bird with good facial expression and a sword  and plain red background. If the given data is less than 5 than generate an sad animated angry bird with yellow background color. Keep it plain and simple and with facial expressions and a Sword in hand" 
+    if rewards <= 6:
+        text = "Generate a sad and unexcited animated angry bird with yellow background color. Keep it plain and simple and with some good facial expressions and a Sword in hand. The background color, color of the bird and the facial expression should keep changing"
+    else:
+        text = "Generate an animated angry bird which should look very happy and enthusiastic and a sword  and plain red background. Keep it plain and simple and with some good facial expressions and a Sword in hand. The background color, color of the bird, object in hand of the angry bird and the facial expression should keep changing" 
     r = requests.post(
     "https://api.deepai.org/api/text2img",
     data={
