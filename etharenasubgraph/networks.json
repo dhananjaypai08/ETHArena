@@ -1,0 +1,8 @@
+{
+  "arbitrum-sepolia": {
+    "ETHArena": {
+      "address": "0xF34814Bb28fC0a3076105c509D39edf4Ff00530e",
+      "startBlock": 121782952
+    }
+  }
+}
