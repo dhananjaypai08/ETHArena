@@ -124,7 +124,7 @@ async def receive_game_data(walletAddress: str, request: Request):
     print(data)
     if data["currentGameState"] == "Lost" or data["currentGameState"] == "Won":
         prompt = "Give me a detailed and personalized feeedback on my Gameplay"
-        data = await structured_rag_response(prompt, documents)
+        data = await structured_rag_response(prompt, [documents[-1]])
         print(data)
         match = re.search(r'```(.*?)```', data, re.DOTALL)
         if match:
