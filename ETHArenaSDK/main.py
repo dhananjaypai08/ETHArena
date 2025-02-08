@@ -10,6 +10,7 @@ from web3 import Web3
 import json
 from eth_account import Account
 import requests
+import re
 
 
 load_dotenv()
@@ -95,7 +96,11 @@ async def receive_game_data(walletAddress: str, request: Request):
         prompt = "Give me a detailed and personalized feeedback on my Gameplay"
         data = await structured_rag_response(prompt, documents)
         print(data)
-        json_data = data.strip('```json').strip('```')
+        match = re.search(r'```(.*?)```', data, re.DOTALL)
+        if match:
+            json_data = match.group(1).strip()  # Extract and clean JSON
+        else:
+            json_data = data.strip('```json').strip('```')
         print(json_data)
         data = json.loads(json_data)
         #print(data)
@@ -116,8 +121,12 @@ async def receive_game_data(walletAddress: str, request: Request):
 @app.get("/getAIResponse")
 async def getAIResponse(walletAddress: str):
     if not user_responses.get(walletAddress):
-        json_data = await normal_chat("Generate a mock data and tell the user to play more games with the same expected output and change the doppleganger everytime")
-        json_data = json_data.strip('```json').strip('```')
+        json_data = await normal_chat("Generate a mock data that should give the user the insight that he has not played any games recently and encourage him to play some game")
+        match = re.search(r'```(.*?)```', data, re.DOTALL)
+        if match:
+            json_data = match.group(1).strip()  # Extract and clean JSON
+        else:
+            json_data = data.strip('```json').strip('```')
         print(json_data)
         data = json.loads(json_data)
         return data
