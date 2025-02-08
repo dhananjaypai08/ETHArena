@@ -128,6 +128,7 @@ async def getAIResponse(walletAddress: str):
         else:
             json_data = json_data.strip('```json').strip('```')
         print(json_data)
+        json_data = json_data.stip('```json').strip('```')
         data = json.loads(json_data)
         return data
         
