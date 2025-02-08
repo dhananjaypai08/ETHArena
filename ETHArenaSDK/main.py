@@ -122,11 +122,11 @@ async def receive_game_data(walletAddress: str, request: Request):
 async def getAIResponse(walletAddress: str):
     if not user_responses.get(walletAddress):
         json_data = await normal_chat("Generate a mock data that should give the user the insight that he has not played any games recently and encourage him to play some game")
-        match = re.search(r'```(.*?)```', data, re.DOTALL)
+        match = re.search(r'```(.*?)```', json_data, re.DOTALL)
         if match:
             json_data = match.group(1).strip()  # Extract and clean JSON
         else:
-            json_data = data.strip('```json').strip('```')
+            json_data = json_data.strip('```json').strip('```')
         print(json_data)
         data = json.loads(json_data)
         return data

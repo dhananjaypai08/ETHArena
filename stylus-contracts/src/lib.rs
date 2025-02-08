@@ -1,80 +1,64 @@
-#![no_std]
-
+// Only run this as a WASM if the export-abi feature is not set.
+#![cfg_attr(not(any(feature = "export-abi", test)), no_main)]
 extern crate alloc;
+
+// Modules and imports
+mod erc721;
+
+use alloy_primitives::{U256, Address};
+/// Import the Stylus SDK along with alloy primitive types for use in our program.
 use stylus_sdk::{
-    prelude::*,
-    storage::{StorageMap, StorageValue, StorageVec},
+    msg, prelude::*
 };
-use alloc::{string::String, vec::Vec};
+use crate::erc721::{Erc721, Erc721Params, Erc721Error};
 
-#[solidity_storage]
-#[derive(Default)]
-pub struct BaseArenaStorage {
-    reputation_score: StorageMap<Address, u64>,
-    rewards_earned: StorageMap<Address, u64>,
-    ai_responses: StorageMap<Address, String>,
-    token_id: StorageValue<u64>,
-    all_users: StorageVec<Address>,
-    games_of_user: StorageMap<Address, StorageVec<BARNNFT>>,
+/// Immutable definitions
+struct StylusNFTParams;
+impl Erc721Params for StylusNFTParams {
+    const NAME: &'static str = "StylusNFT";
+    const SYMBOL: &'static str = "SNFT";
+
+    fn token_uri(token_id: U256) -> String {
+        format!("{}{}{}", "https://my-nft-metadata.com/", token_id, ".json")
+    }
 }
 
-#[derive(Clone, Debug, AbiType, SolidityType)]
-pub struct BARNNFT {
-    owner: Address,
-    reputation_score: u64,
-    ai_rewards: u64,
-    image_asset: String,
-    doppleganger_asset: String,
-    token_id: u64,
+// Define the entrypoint as a Solidity storage object. The sol_storage! macro
+// will generate Rust-equivalent structs with all fields mapped to Solidity-equivalent
+// storage slots and types.
+sol_storage! {
+    #[entrypoint]
+    struct StylusNFT {
+        #[borrow] // Allows erc721 to access StylusNFT's storage and make calls
+        Erc721<StylusNFTParams> erc721;
+    }
 }
 
-#[external]
-impl BaseArena {
-    pub fn new() -> Self {
-        Self::default()
+#[public]
+#[inherit(Erc721<StylusNFTParams>)]
+impl StylusNFT {
+    /// Mints an NFT
+    pub fn mint(&mut self) -> Result<(), Erc721Error> {
+        let minter = msg::sender();
+        self.erc721.mint(minter)?;
+        Ok(())
     }
 
-    pub fn safe_mint(
-        &mut self,
-        to: Address,
-        rewards_earned_user: u64,
-        uri: String,
-        doppleganger_uri: String,
-    ) {
-        let current_token_id = self.token_id.get().unwrap_or(0) + 1;
-        self.token_id.set(current_token_id);
-
-        let new_reputation = self.reputation_score.get(to).unwrap_or(0) + 1;
-        self.reputation_score.insert(to, new_reputation);
-
-        let new_rewards = self.rewards_earned.get(to).unwrap_or(0) + rewards_earned_user;
-        self.rewards_earned.insert(to, new_rewards);
-
-        let new_nft = BARNNFT {
-            owner: to,
-            reputation_score: new_reputation,
-            ai_rewards: new_rewards,
-            image_asset: uri.clone(),
-            doppleganger_asset: doppleganger_uri.clone(),
-            token_id: current_token_id,
-        };
-
-        let mut user_nfts = self.games_of_user.get(to).unwrap_or_default();
-        user_nfts.push(new_nft);
-        self.games_of_user.insert(to, user_nfts);
-
-        self.all_users.push(to);
+    /// Mints an NFT to another address
+    pub fn mint_to(&mut self, to: Address) -> Result<(), Erc721Error> {
+        self.erc721.mint(to)?;
+        Ok(())
     }
 
-    pub fn get_all_users(&self) -> Vec<Address> {
-        self.all_users.iter().collect()
+    /// Burns an NFT
+    pub fn burn(&mut self, token_id: U256) -> Result<(), Erc721Error> {
+        // This function checks that msg::sender() owns the specified token_id
+        self.erc721.burn(msg::sender(), token_id)?;
+        Ok(())
     }
 
-    pub fn save_response(&mut self, user: Address, data: String) {
-        self.ai_responses.insert(user, data);
-    }
-
-    pub fn get_nfts(&self, user: Address) -> Vec<BARNNFT> {
-        self.games_of_user.get(user).unwrap_or_default().iter().collect()
+    /// Total supply
+    pub fn total_supply(&mut self) -> Result<U256, Erc721Error> {
+        Ok(self.erc721.total_supply.get())
     }
 }
