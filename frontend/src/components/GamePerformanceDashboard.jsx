@@ -212,12 +212,12 @@ export const GamePerformanceDashboard = () => {
     {
       icon: Crown,
       title: "Gamer Doppelganger",
-      description: gameData["gamer match/doppleganger"] || "N/A",
+      description: gameData["gamer match/doppleganger"] || "Matt Hamilton",
     },
     {
       icon: Flame,
       title: "Reputation",
-      description: personalData["user reputation"] || "N/A",
+      description: personalData["user reputation"] || "Play game to earn some reputation",
     },
     {
       icon: Star,
