@@ -36,7 +36,6 @@ async def normal_chat(prompt: str):
                         "name": "Nader Dabit","description": "AI Agent and Finance enthusiast and he is the goat of dev rel and currently works at Eigen labs",
                         "name": "Kartik Talwar","description": "He is the one who hosts and manages ETHGlobal hackathons and events globally and somewhat finds himself funny",
                         "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
-                        "name": "Kartik Talwar","description": "He is the one who hosts and manages ETHGlobal hackathons and events globally and somewhat finds himself funny",
                     }
                     - Change your puns response in the JSON every single time with new twists
                     - For every single response, within the JSON response:  Include the 'overall performance', 'user reputation', 'recommendation for games web3d on his capabilities that can earn him rewards', 'estimate rewards', 'game genre'
@@ -103,7 +102,7 @@ async def structured_rag_output(prompt: str, documents: list):
                 "content": """Context: You are an expert Mobile + First Person Shooter Game Analyzer. 
                     Instructions: 
                     - Generate a JSON response for a user query about his Game data that includes his accuracy, total shots, destroyed pigs, hit percentage, current state, slingshot state and strictly adhere to the below given points without None values
-                    - Analyze the user's query about Games web3d on his Game data
+                    - Analyze the user's query about Games web3 on his Game data
                     - Format response as a clean, informative JSON object
                     - Within the JSON Response it should contain the 'fun pun' key with the value that should be fun, unique and describes the users gameplay and also includes one of the individuals given below and roasting them
                     - Along with this, the JSON response should also contain a Name of the doppleganger or best partner / individual best suited for the user web3d on his game data from the below given individuals
@@ -180,7 +179,7 @@ async def structured_rag_response(prompt : str, documents: list):
                 "content": """Context: You are an expert Mobile + First Person Shooter Game Analyzer. 
                     Instructions: 
                     - Generate a JSON response for a user query about his Game data that includes his accuracy, total shots, destroyed pigs, hit percentage, current state, slingshot state and strictly adhere to the below given points without None values
-                    - Analyze the user's query about Games web3d on his Game data
+                    - Analyze the user's query about Games web3 on his Game data
                     - Format response as a clean, informative JSON object
                     - Within the JSON Response it should contain the 'fun pun' key with the value that should be fun, unique and describes the users gameplay and also includes one of the individuals given below and roasting them
                     - Along with this, the JSON response should also contain a Name of the doppleganger or best partner / individual best suited for the user web3d on his game data from the below given individuals

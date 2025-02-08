@@ -26,6 +26,36 @@ with open("./contracts/BaseArena.json", "r") as f:
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 account = Account.from_key(private_key)
 user_responses = {}
+mock_data = {
+  "fun pun": "It looks like you're having a 'pig-astrophe' in the gaming world! Time to get your game face on!",
+  "gamer match/doppleganger": "Tomasz Stańczak",
+  "overall performance": "Lagging behind",
+  "Personalized Feeds": [
+    {
+      "rewards earned": 0,
+      "user reputation": "Newbie",
+      "percentile": "0",
+      "onchain footprints": "1",
+      "game genres": ["Arcade"]
+    }
+  ],
+  "game download links": "Check out our top picks for First-Person Shooter games: https://example.com/game1, https://example.com/game2",
+  "estimated rewards": "₹10,000",
+  "accuracy": "0.25",
+  "overall_benefit": "Improve your accuracy and skills",
+  "recommended games for esports players": [
+    {
+      "game scope": "8",
+      "game popularity": "6",
+      "game benefits in terms of money and tournaments": "Potential to earn ₹10,000 - ₹50,000 per tournament"
+    },
+    {
+      "game scope": "9",
+      "game popularity": "9",
+      "game benefits in terms of money and tournaments": "Potential to earn ₹50,000 - ₹100,000 per tournament"
+    }
+  ]
+}
 # print(contract.functions.getAllUsers().call())
 # print(account.address, w3.eth.get_balance(account.address))
 
@@ -121,16 +151,20 @@ async def receive_game_data(walletAddress: str, request: Request):
 @app.get("/getAIResponse")
 async def getAIResponse(walletAddress: str):
     if not user_responses.get(walletAddress):
-        json_data = await normal_chat("Generate a mock data that should give the user the insight that he has not played any games recently and encourage him to play some game")
-        match = re.search(r'```(.*?)```', json_data, re.DOTALL)
-        if match:
-            json_data = match.group(1).strip()  # Extract and clean JSON
-        else:
+        try:
+            json_data = await normal_chat("Generate a mock data that should give the user the insight that he has not played any games recently and encourage him to play some game")
+            print(json_data)
+            match = re.search(r'```(.*?)```', json_data, re.DOTALL)
+            if match:
+                json_data = match.group(1).strip()  # Extract and clean JSON
+            else:
+                json_data = json_data.strip('```json').strip('```')
+            print(json_data)
             json_data = json_data.strip('```json').strip('```')
-        print(json_data)
-        json_data = json_data.strip('```json').strip('```')
-        data = json.loads(json_data)
-        return data
+            data = json.loads(json_data)
+            return data
+        except:
+            return mock_data
         
     return user_responses.get(walletAddress)
 

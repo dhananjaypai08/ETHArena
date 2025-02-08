@@ -1,13 +1,13 @@
 [package]
-name = "stylus_erc721_example"
-version = "0.1.7"
+name = "stylus-contracts"
+version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 keywords = ["arbitrum", "ethereum", "stylus", "alloy"]
 
 [dependencies]
-alloy-primitives = "=0.7.6"
-alloy-sol-types = "=0.7.6"
+alloy-primitives = "0.8.14"  # Remove the `features = ["full"]` line
+alloy-sol-types = "0.8.14"   # Ensure this version is compatible
 mini-alloc = "0.7.0"
 stylus-sdk = "0.7.0"
 hex = "0.4.3"
