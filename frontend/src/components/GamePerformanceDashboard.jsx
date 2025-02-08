@@ -23,24 +23,24 @@ import { Card } from './ui/Card';
 import { Button } from './ui/Button';
 import { useContract } from '../hooks/useContract';
 
-// Helper: converts BigInt values to strings if necessary.
+// Helper: converts BigInt values to strings if necessary
 const convert = (value) => (typeof value === 'bigint' ? value.toString() : value);
 
-// News Ticker Component - a subtle, slowly moving headline
+// News Ticker Component
 const NewsTicker = ({ text }) => (
   <div className="relative overflow-hidden mb-6">
     <motion.div
       className="whitespace-nowrap"
       initial={{ x: '100%' }}
       animate={{ x: '-100%' }}
-      transition={{ repeat: Infinity, duration: 30, ease: 'linear' }} // slower ticker
+      transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
     >
       <span className="text-xs text-gray-300 tracking-wide">{text}</span>
     </motion.div>
   </div>
 );
 
-// Small and crisp performance metric card
+// Performance metric card
 const GamePerformanceCard = ({ icon: Icon, title, value, subtitle }) => (
   <motion.div whileHover={{ y: -2 }} className="h-full">
     <Card className="h-full border border-indigo-500/20 relative overflow-hidden p-4">
@@ -60,7 +60,7 @@ const GamePerformanceCard = ({ icon: Icon, title, value, subtitle }) => (
   </motion.div>
 );
 
-// Achievement badge with subtle styling
+// Achievement badge
 const AchievementBadge = ({ icon: Icon, title, description }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
@@ -76,11 +76,11 @@ const AchievementBadge = ({ icon: Icon, title, description }) => (
   </motion.div>
 );
 
-// Radar Chart for game genres
+// Game genre radar chart
 const GameGenreRadar = ({ genres = [] }) => {
   const genreData = [
     { genre: 'Action', value: genres.includes('Action') ? 80 : 30 },
-    { genre: 'Arcade', value: genres.includes('Arcade') ? 90 : 40 },
+    { genre: 'First-Person Shooter', value: genres.includes('First-Person Shooter') ? 90 : 40 },
     { genre: 'Casual', value: genres.includes('Casual') ? 85 : 35 },
     { genre: 'Strategy', value: genres.includes('Strategy') ? 75 : 25 },
     { genre: 'Puzzle', value: genres.includes('Puzzle') ? 70 : 20 },
@@ -106,19 +106,19 @@ const GameGenreRadar = ({ genres = [] }) => {
   );
 };
 
-// Card for each recommended game
+// Recommended game card
 const RecommendedGameCard = ({ game }) => (
   <Card className="border border-indigo-500/20 p-4">
     <h3 className="text-xs font-semibold text-indigo-300 mb-1">
-      {game['game scope'] || 'Game Title'}
+      Rating: {game['game scope']}
     </h3>
     <p className="text-[10px] text-gray-400 mb-1">
       <span className="font-medium">Popularity: </span>
-      {convert(game['game popularity']) || 'N/A'}
+      {game['game popularity']}
     </p>
     <p className="text-[10px] text-gray-400">
       <span className="font-medium">Benefits: </span>
-      {game['game benefits in terms of money and tournaments'] || 'N/A'}
+      {game['game benefits in terms of money and tournaments']}
     </p>
   </Card>
 );
@@ -137,12 +137,13 @@ export const GamePerformanceDashboard = () => {
         const response = await axios.get(
           `https://basearena.onrender.com/getAIResponse?walletAddress=${walletAddress}`
         );
-        // The API returns an object keyed by wallet addresses.
-        // To simplify front-end access, extract the inner object for the current wallet.
-        const data = response.data;
-        console.log(data);
         
-        setGameData(data);
+        // Parse the response data if it's a string
+        const parsedData = typeof response.data === 'string' 
+          ? JSON.parse(response.data) 
+          : response.data;
+        
+        setGameData(parsedData);
       } catch (error) {
         console.error('Error fetching game data:', error);
       } finally {
@@ -169,75 +170,59 @@ export const GamePerformanceDashboard = () => {
     );
   }
 
-  // Now you can directly destructure properties from gameData.
-  const {
-    "fun pun": funPun = "You're a gaming legend!",
-    "gamer match/doppleganger": gamerDopple = "Unknown",
-    "overall performance": overallPerformanceRaw = "Keep playing and improving!",
-    "Personalized Feeds": personalizedFeeds = [],
-    "game download links": gameDownloadLinks = "#",
-    "estimated rewards": estimatedRewardsRaw = "N/A",
-    "accuracy": accuracyRaw = "N/A",
-    overall_benefit: overallBenefit = "",
-    "recommended games for esports players": recommendedGames = [],
-  } = gameData;
-
-  const overallPerformance = convert(overallPerformanceRaw);
-  const estimatedRewards = convert(estimatedRewardsRaw);
-  const accuracy = convert(accuracyRaw);
-
-  const personalData = personalizedFeeds[0] || {
+  // Get the personalized feed data
+  const personalData = gameData["Personalized Feeds"]?.[0] || {
     "rewards earned": 0,
     "user reputation": "Newcomer",
     percentile: "N/A",
     "onchain footprints": "N/A",
     "game genres": [],
   };
-
-  // Define performance metrics with subtle text sizes
+  // console.log(gameData)
+  // Define performance metrics
   const performanceMetrics = [
     {
       title: "Accuracy",
-      value: accuracy,
+      value: gameData.accuracy || "N/A",
       icon: Crosshair,
       subtitle: "Precision in every shot.",
     },
     {
       title: "Estimated Rewards",
-      value: estimatedRewards,
+      value: gameData["estimated rewards"] || "N/A",
       icon: Coins,
       subtitle: "What you might earn.",
     },
     {
       title: "Overall Performance",
-      value: overallPerformance,
+      value: gameData["overall performance"] || "N/A",
       icon: Trophy,
       subtitle: "A snapshot of your progress.",
     },
     {
       title: "On-chain Footprints",
-      value: convert(personalData["onchain footprints"]),
+      value: personalData["onchain footprints"] || "0",
       icon: Star,
       subtitle: "Your blockchain impact.",
     },
   ];
 
-  // Define achievements using personalized feed data
+  // Define achievements
   const achievements = [
     {
       icon: Crown,
       title: "Gamer Doppelganger",
-      description: gamerDopple,
+      description: gameData["gamer match/doppleganger"] || "N/A",
     },
     {
       icon: Flame,
       title: "Reputation",
-      description: personalData["user reputation"],
+      description: personalData["user reputation"] || "N/A",
     },
     {
       icon: Star,
       title: "Top Percentile",
-      description: personalData.percentile,
+      description: personalData.percentile || "N/A",
     },
   ];
 
@@ -248,13 +233,13 @@ export const GamePerformanceDashboard = () => {
       <div className="absolute bottom-0 right-1/1.5 w-80 h-80 bg-teal-500/10 rounded-full blur-2xl animate-pulse" />
 
       <div className="max-w-7xl mx-auto relative">
-        {/* News Ticker with a slow moving headline */}
-        <NewsTicker text={funPun} class="text-20xl" />
+        {/* News Ticker */}
+        <NewsTicker text={gameData["fun pun"] || "Welcome to your gaming dashboard!"} />
 
-        {/* Main Intro (subtle secondary headline) */}
-        {overallBenefit && (
+        {/* Main Intro */}
+        {gameData.overall_benefit && (
           <div className="mb-6 text-center">
-            <p className="text-xs text-gray-400">{overallBenefit}</p>
+            <p className="text-xs text-gray-400">{gameData.overall_benefit}</p>
           </div>
         )}
 
@@ -309,7 +294,7 @@ export const GamePerformanceDashboard = () => {
         </motion.div>
 
         {/* Recommended Games Section */}
-        {recommendedGames.length > 0 && (
+        {gameData["recommended games for esports players"]?.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -320,7 +305,7 @@ export const GamePerformanceDashboard = () => {
               Recommended Games for Aspiring Esports Stars
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {recommendedGames.map((game, index) => (
+              {gameData["recommended games for esports players"].map((game, index) => (
                 <RecommendedGameCard key={index} game={game} />
               ))}
             </div>
@@ -336,7 +321,7 @@ export const GamePerformanceDashboard = () => {
         >
           <Button
             className="bg-gradient-to-r from-indigo-500 to-teal-500 hover:from-indigo-600 hover:to-teal-600 text-white px-6 py-2 rounded text-xs font-medium"
-            onClick={() => window.open(gameDownloadLinks, '_blank')}
+            onClick={() => window.open(gameData["game download links"], '_blank')}
           >
             <Zap className="w-4 h-4 inline-block mr-1" />
             Play / Download Now
