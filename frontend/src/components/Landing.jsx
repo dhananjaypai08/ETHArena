@@ -8,10 +8,12 @@ import {
   ArrowRight,
   Trophy,
   Rocket,
-  Bird
+  Bird,
+  Download
 } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { Alert } from "./ui/Alert";
 
 const FeatureCard = ({ icon: Icon, title, description, techDetail }) => (
   <motion.div
@@ -43,7 +45,8 @@ const StatCard = ({ value, label, description }) => (
 
 export const Landing = () => {
   const navigate = useNavigate();
-
+  const gameDownloadLink = 'https://github.com/dhananjaypai08/ETHArena/releases/tag/mac'; 
+  
   const features = [
     {
       icon: Brain,
@@ -114,11 +117,12 @@ export const Landing = () => {
 
             <h1 className="text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
-              Master the Fling
+              Bringing Steam on-chain! 
               </span>
               <br />
               <span className="bg-gradient-to-r from-pink-500 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
-              with AI
+              On-chain Rewards 
+              with AI tadka
               </span>
             </h1>
 
@@ -128,7 +132,19 @@ export const Landing = () => {
               we're creating a whole new metaverse of play-to-earn possibilities!
             </p>
 
+            
+          <Alert type="warning" message="The only way to interact with the blockchain, earn NFTs, and build your reputation is by playing the game." />
+
             <div className="flex justify-center gap-6">
+
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <a href={gameDownloadLink} download className="group">
+                <Button className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-600 hover:to-blue-600 text-white group">
+                  <Download className="w-5 h-5 mr-2" /> Download Game
+                </Button>
+              </a>
+              </motion.div>
+
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button onClick={() => navigate('/performance')} className="group">
                   <span>AI Gaming Companion</span>

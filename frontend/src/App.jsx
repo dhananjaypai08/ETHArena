@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import { GamingDashboard } from './components/GamingDashboard';
 import { GamePerformanceDashboard } from './components/GamePerformanceDashboard';
 import { NFTMarketplace } from './components/NFTMarketplace';
+import { GraphExplorerDashboard } from './components/GraphExplorerDashboard'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/gaming" element={<GamingDashboard />} />
             <Route path="/performance" element={<GamePerformanceDashboard />} />
             <Route path="/marketplace" element={<NFTMarketplace />} />
+            <Route path="/dashboard" element={<GraphExplorerDashboard/>} />
           </Routes>
         </div>
       </Router>

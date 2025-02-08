@@ -16,6 +16,7 @@ load_dotenv()
 private_key = os.environ.get("PRIVATE_KEY")
 contract_address = os.environ.get("CONTRACT_ADDRESS")
 rpc_url = os.environ.get("BASE_RPC_URL")
+api_key = os.environ.get("GAIA_API_KEY")
 
 
 w3 = Web3(Web3.HTTPProvider(rpc_url))
@@ -123,26 +124,32 @@ async def getAIResponse(walletAddress: str):
         
     return user_responses.get(walletAddress)
 
-@app.get("/chat")
+@app.post("/chat")
 async def prompt(request: Request):
     body = await request.json()
     prompt = body["prompt"]
-    print(f"Input prompt : {prompt}")
-    api_key = os.environ.get("GAIA_API_KEY")
+    doc = str(body["graph_data"])
+    print(type(doc))
     url = "https://0x0c8923d457934eae1a4ce708f07a980f1ce57a32.gaia.domains/v1/chat/completions"
     headers = {
     "accept": "application/json",
     "Content-Type": "application/json",
     "Authorization": f"Bearer {api_key}"
     }
+    final_prompt = f"Based on this data : {doc}. Answer this question: {prompt}"
     data = {
     "messages": [
-        {"role": "system", "content": "You are an helpful assistant that analyzes uniswap data and provides insights"},
-        {"role": "user", "content": prompt}
+        {"role": "system", "content": "You are an helpful assistant that knows about the graph and its data analysis and can quickly give correct answers"},
+        {"role": "user", "content": final_prompt}
     ],
     "model": "llama-3.2-3B-Instruct"
     }
-    response = requests.post(url, json=data, headers=headers)
+    try:
+        response = requests.post(url, json=data, headers=headers)
+    except Exception as e:
+        print(f"Error generating response : {e}")
+    print(response.text)
+    print(response.json())
     data = response.json()
     print(data)
     return data['choices'][0]['message']['content']

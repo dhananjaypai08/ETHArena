@@ -30,12 +30,12 @@ async def normal_chat(prompt: str):
                     - Along with this, the JSON response should also contain a Name of the doppleganger or best partner / individual best suited for the user web3d on his game data from the below given individuals
                     - Individuals : {
                         
-                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
-                        "name": "Steven Goldfeder", "description": "Steven Goldfeder: Co-founder of Offchain Labs, the company behind Arbitrum, and currently serves as the CEO",
+                        "name": "Matt Hamilton", "description": "The genuis behind stylus sdk for rust devs who works at Arbitrum (Offchain Labs) and is very supportive",
+                        "name": "Harish Kotra", "description": "The most supportive and humble coder at Gaia with a typical south indian accent that looks very cute on him",
                         "name": "Tomasz Stańczak", "description": "He is the founder and the most fun guy in the Nethermind team and is an Ecosystem manager at web3",
-                        "name": "Denver Dsouza", "description": "He is the guy who started Devfolio(A hackathon platform which supports tons of developers around the world). He is hard working and focused on the Indian builders to build cool stuff that are also impactful",
-                        "name": "Kabir", ""description": "He is the guy who does the multi tasking stuff for the community, He handles strategy, operations and grants to empower builders to build consumer facing products",
                         "name": "Nader Dabit","description": "AI Agent and Finance enthusiast and he is the goat of dev rel and currently works at Eigen labs",
+                        "name": "Kartik Talwar","description": "He is the one who hosts and manages ETHGlobal hackathons and events globally and somewhat finds himself funny",
+                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
                         "name": "Kartik Talwar","description": "He is the one who hosts and manages ETHGlobal hackathons and events globally and somewhat finds himself funny",
                     }
                     - Change your puns response in the JSON every single time with new twists
@@ -109,13 +109,12 @@ async def structured_rag_output(prompt: str, documents: list):
                     - Along with this, the JSON response should also contain a Name of the doppleganger or best partner / individual best suited for the user web3d on his game data from the below given individuals
                     - Individuals : {
                         
-                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
-                        "name": "Steven Goldfeder", "description": "Steven Goldfeder: Co-founder of Offchain Labs, the company behind Arbitrum, and currently serves as the CEO",
+                       "name": "Matt Hamilton", "description": "The genuis behind stylus sdk for rust devs who works at Arbitrum (Offchain Labs) and is very supportive",
+                        "name": "Harish Kotra", "description": "The most supportive and humble coder at Gaia with a typical south indian accent that looks very cute on him",
                         "name": "Tomasz Stańczak", "description": "He is the founder and the most fun guy in the Nethermind team and is an Ecosystem manager at web3",
-                        "name": "Denver Dsouza", "description": "He is the guy who started Devfolio(A hackathon platform which supports tons of developers around the world). He is hard working and focused on the Indian builders to build cool stuff that are also impactful",
-                        "name": "Kabir", ""description": "He is the guy who does the multi tasking stuff for the community, He handles strategy, operations and grants to empower builders to build consumer facing products",
                         "name": "Nader Dabit","description": "AI Agent and Finance enthusiast and he is the goat of dev rel and currently works at Eigen labs",
                         "name": "Kartik Talwar","description": "He is the one who hosts and manages ETHGlobal hackathons and events globally and somewhat finds himself funny",
+                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
                     }
                     - Change your puns response in the JSON every single time with new twists
                     - For every single response, within the JSON response:  Include the 'overall performance', 'user reputation', 'recommendation for games web3d on his capabilities that can earn him rewards', 'estimate rewards', 'game genre'
@@ -186,14 +185,12 @@ async def structured_rag_response(prompt : str, documents: list):
                     - Within the JSON Response it should contain the 'fun pun' key with the value that should be fun, unique and describes the users gameplay and also includes one of the individuals given below and roasting them
                     - Along with this, the JSON response should also contain a Name of the doppleganger or best partner / individual best suited for the user web3d on his game data from the below given individuals
                     - Individuals : {
-                        
-                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
-                        "name": "Steven Goldfeder", "description": "Steven Goldfeder: Co-founder of Offchain Labs, the company behind Arbitrum, and currently serves as the CEO",
+                        "name": "Matt Hamilton", "description": "The genuis behind stylus sdk for rust devs who works at Arbitrum (Offchain Labs) and is very supportive",
+                        "name": "Harish Kotra", "description": "The most supportive and humble coder at Gaia with a typical south indian accent that looks very cute on him",
                         "name": "Tomasz Stańczak", "description": "He is the founder and the most fun guy in the Nethermind team and is an Ecosystem manager at web3",
-                        "name": "Denver Dsouza", "description": "He is the guy who started Devfolio(A hackathon platform which supports tons of developers around the world). He is hard working and focused on the Indian builders to build cool stuff that are also impactful",
-                        "name": "Kabir", ""description": "He is the guy who does the multi tasking stuff for the community, He handles strategy, operations and grants to empower builders to build consumer facing products",
                         "name": "Nader Dabit","description": "AI Agent and Finance enthusiast and he is the goat of dev rel and currently works at Eigen labs",
                         "name": "Kartik Talwar","description": "He is the one who hosts and manages ETHGlobal hackathons and events globally and somewhat finds himself funny",
+                        "name": "Chainyoda", "description": "The most fun and old KOL till date. Core contributor of Hadron and an angel investor with good meme knowledge",
                     }
                     - Change your puns response in the JSON every single time with new twists
                     - For every single response, within the JSON response:  Include the 'overall performance', 'user reputation', 'recommendation for games web3d on his capabilities that can earn him rewards', 'estimate rewards', 'game genre'
