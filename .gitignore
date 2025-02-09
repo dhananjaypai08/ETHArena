@@ -1,6 +1,5 @@
 # git ignore
 frontend/.env
-baseArenaSDK/__pycache__/
 frontend/node_modules/
 baseArenaSDK/env/
 baseArenaSDK/.env
@@ -8,3 +7,6 @@ AngryBirdsStyleGame/
 **/.env
 UnityGame/executables/
 etharenasubgraph/package-lock.json
+ETHArenaSDK/node_modules/
+baseArenaSDK/__pycache__/
+ETHArenaSDK/package-lock.json

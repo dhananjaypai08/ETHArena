@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> Birds;
     private List<GameObject> Pigs;
 
-    private string serverUrl = "http://localhost:8000/getUserData?walletAddress=0x1d72B383cd2F783e4f2eDafE9D7544A3355507C2";
+    private string serverUrl = "https://basearena.onrender.com/getUserData?walletAddress=0x1d72B383cd2F783e4f2eDafE9D7544A3355507C2";
 
     // Use this for initialization
     void Start()

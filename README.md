@@ -1,147 +1,275 @@
-# ETHArena
-- Your Gaming AI companion to help you level up your game
-- An ERC2771 compatible aggregated SDK with AI Based NFT generation based on gameplay
+# ETHArena 🎮 
 
----
-
-BaseArena is a modern platform designed with game developers and builders in mind. By combining the latest in Web3 technologies, interactive gaming analytics, and AI-driven insights, BaseArena offers a seamless environment to measure game improvements, earn on-chain rewards, manage gameplay data, and even create unique NFTs and game assets—all in a subtle, elegant manner.
-
-## Contract Deployment
-- Contract Deployment : [https://sepolia.basescan.org/address/0x5b6d2baad7d12ab324182ae6e27234052fb39479](https://sepolia.basescan.org/address/0x5b6d2baad7d12ab324182ae6e27234052fb39479)
+> Bringing Steam on-chain! Play, earn, and evolve with AI agents that forge your legacy. Your epic gameplay moments transform into unique NFTs while legendary gaming personas become your digital twins. The future of gaming is here—where every move writes your on-chain story.
 
 ## Table of Contents
 
-- [Problem Statement](#problem-statement)
-- [Market Opportunity](#market-opportunity)
-- [Solution Overview](#solution-overview)
-- [Technical Details](#technical-details)
-- [Tech Stack](#tech-stack)
-- [Future Work](#future-work)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+- [Deployments](#deployments)
+- [Flow Chart and System Design](#system-architecture)
+- [Problem Statement](#-problem-statement)
+- [Solution](#-solution)
+- [Multi Agent System Architecture](#multi-agent-system-architecture)
+- [Tech stack](#-tech-stack)
+- [Local Installation](#-local-installation)
+- [Partners and Integrations](#partnerships-and-integrations)
+  - [Arbitrum](#1-arbitrum-integration)
+  - [The Graph](#2-the-graph-integration)
+  - [Gaia and Collab.land](#3-gaiacollabland-integration)
+  - [Nethermind](#4-nethermind-integration)
+- [Contributing](#-contributing)
+- [License](#-license)
+## Deployments
 
-## Problem Statement
+- Frontend: [ETHArena Platform](https://eth-arena.vercel.app/)
+- Backend: [ETHArena SDK API](https://basearena.onrender.com/)
+- Smart Contract [View on Arbitrum  Etherscan](https://sepolia.arbiscan.io/tx/0x2d097a604a4af24bcc7e801667db4d5acc8da0eca568ad771da71e831733c029)
 
-Game developers and builders face a set of nuanced challenges:
-- **Data and Analytics:** Measuring improvements and gathering insights from gameplay can be complex and fragmented.
-- **On-Chain Rewards:** There is a growing need for systems that reward achievements in an authentic and decentralized manner.
-- **Asset Generation:** Manually creating game assets and NFTs is time-consuming and often lacks uniqueness.
-- **Community and Engagement:** Developers and gamers alike seek a supportive ecosystem that offers meaningful feedback and a touch of personalization, such as an AI-generated gaming doppleganger.
+## 📐 System Architecture
 
-## Market Opportunity
+<img src="./images/Flowchart.png"/>
 
-- **Emerging Web3 Ecosystem:** As blockchain adoption continues to grow, there is an increasing interest in platforms that blend traditional gaming with decentralized finance and asset ownership.
-- **Gaming Innovation:** The gaming industry is ripe for tools that not only enhance game development but also empower developers with AI-driven performance insights.
-- **Developer-Centric Tools:** With a focus on precision and subtlety, BaseArena meets the need for sophisticated yet elegant developer toolkits that integrate seamlessly with existing game engines.
+## 🎯 Problem Statement
 
-## Solution Overview
+The Web3 gaming ecosystem faces several critical challenges:
 
-BaseArena provides a thoughtful integration of three core elements:
-- **Web3 Technologies:** Enjoy on-chain rewards, transparent smart contract operations, and the minting of unique, AI-generated NFTs.
-- **Gaming Analytics:** Our SDK, demonstrated through an Angry Birds-inspired plugin, captures gameplay data with minimal intrusion while offering a crisp, detailed analytics dashboard.
-- **AI Agents:** Leveraging advanced AI, our system delivers insightful recommendations and even identifies a "gaming doppleganger"—suggesting a notable personality from the Web3 or gaming world who might inspire you.
+1. **Distribution Fragmentation**
+   - Web2 gaming platforms like Steam command 45% of the global market
+   - Web3 games lack unified distribution channels
+   - No standardized platform for discovering blockchain games
 
-## Technical Details
+2. **Complex User Experience**
+   - High barrier to entry with wallet setup requirements
+   - Fragmented reward systems across different games
+   - Disconnected gaming experiences between different blockchain networks
 
-- **Data Capture:**  
-  Our lightweight SDK integrates with popular game engines to capture real-time gameplay data (e.g., shots, targets, performance metrics) using an elegant Angry Birds-style plugin.
+3. **Technical Limitations**
+   - Manual NFT generation processes
+   - No unified reputation system across game engines
+   - Limited on-chain reward mechanisms
+   - Privacy concerns with gameplay data
 
-- **AI-Powered Insights:**  
-  Using a retrieval-augmented generation (RAG) model by Cohere, BaseArena subtly generates detailed performance analyses and actionable advice for game improvement.
+## 💡 Solution
 
-- **NFT & Asset Generation:**  
-  With DeepAI, we create unique NFTs and game assets that are entirely generated based on your gameplay data, ensuring each token is one-of-a-kind.
+ETHArena revolutionizes Web3 gaming through:
 
-- **On-Chain Rewards:**  
-  Smart contracts facilitate transparent rewards in the form of on-chain tokens. Gamers and developers alike can receive appreciation (for instance, 0.1 ETH contributions) in a seamless, decentralized manner.
+1. **Seamless Integration**
+   - Unity/Unreal Engine plugins for easy developer onboarding
+   - Account abstraction (ERC2771) for gasless transactions
+   - Invisible blockchain integration for players
 
-## Tech Stack
+2. **AI-Powered Gaming**
+   - Real-time gameplay analysis
+   - Personalized performance insights
+   - Dynamic NFT generation based on gameplay
+   - Gaming doppelganger matching system
 
-- **Frontend:**  
-  - React.js  
-  - Tailwind CSS  
-  - Framer Motion (for refined animations)  
-  - Recharts (for clean data visualizations)  
-  - Lucide Icons
+3. **Unified Platform**
+   - Cross-engine compatibility
+   - Standardized reward system
+   - Integrated reputation tracking
+   - Community-driven appreciation mechanism
 
-- **Backend & Data Processing:**  
-  - Node.js / Express  
-  - Axios  
-  - Cohere’s RAG model for AI insights  
-  - DeepAI for generative NFTs and assets
+## 🔧 Technical Deep Dive
 
-- **Blockchain Integration:**  
-  - Solidity for smart contracts  
-  - Web3.js / Ethers.js for blockchain interactions
+### Architecture Components
 
-- **SDK & Plugin:**  
-  - Custom SDK to integrate gameplay data capture  
-  - A subtle, Angry Birds-inspired plugin as a proof-of-concept
+1. **ETHArena SDK**
+   - Fast API backend processing game movements
+   - Real-time data parsing and structuring
+   - Integration with AI agents
+   - Account abstraction layer
 
-## Future Work
+2. **AI Agents**
+   - RAG-based Gaia Agent for performance analysis
+   - DeepAI integration for NFT generation
+   - Substream-powered subgraph for entity changes
+   - Graph-based monitoring system
 
-- **Broader Game Integration:**  
-  Extend the SDK to support a wider range of games and platforms.
-  
-- **Enhanced AI Features:**  
-  Introduce predictive analytics, personalized improvement tips, and additional AI-driven advisories.
+3. **Smart Contracts**
+   - ERC2771 implementation for account abstraction
+   - Arbitrum Sepolia integration for minting and events
+   - On-chain reputation tracking
+   - Reward distribution system
 
-- **Community & Marketplace:**  
-  Develop a vibrant marketplace for NFTs and game assets alongside community features like tournaments and leaderboards.
+### Innovation in Gaming
+- Gaming reputation system on Arbitrum
+- Automated SBT minting based on gameplay achievements
+- Real-time monitoring and reward distribution
+- Future expansion into game licensing platform
 
-- **Mobile & Cross-Platform Support:**  
-  Optimize BaseArena for mobile and diverse gaming devices, ensuring a consistent experience across platforms.
 
-## Getting Started
+## Multi-Agent System Architecture:
 
-### Prerequisites
+- Game Companion Agent: Monitors gameplay and provides real-time advice
+Code : https://github.com/dhananjaypai08/ETHArena/blob/master/ETHArenaSDK/main.py#L109
 
-- Node.js and npm/yarn installed.
-- A Web3 wallet (e.g., MetaMask) for testing on-chain features.
-- API keys for Cohere and DeepAI (to be configured via environment variables).
+- DeepAI Agent: Generates unique NFT assets based on gameplay data
+Code : https://github.com/dhananjaypai08/ETHArena/blob/master/ETHArenaSDK/main.py#L268
 
-### Installation
+- Gaia Agent: Handles on-chain interactions and reward distribution
+Code. : https://github.com/dhananjaypai08/ETHArena/blob/master/ETHArenaSDK/baseAgent.py#L165
 
-1. **Clone the Repository:**
+- RAG-based Analysis Agent: Processes game metrics and provides structured insights
+Code : https://github.com/dhananjaypai08/ETHArena/blob/master/ETHArenaSDK/baseAgent.py#L11
 
-   ```bash
-   git clone https://github.com/yourusername/BaseArena.git
-   cd BaseArena
-   ```
+- Account abstraction (ERC2771) for frictionless onboarding of traditional gamers
+Code : 
+https://github.com/dhananjaypai08/ETHArena/blob/master/ETHArenaSDK/main.py#L218
 
-2. **Install Dependencies:**
+## 🛠 Tech Stack
 
-   ```bash
-   npm install
-   ```
+- **Frontend**: React, TailwindCSS, Framer Motion
+- **Backend**: FastAPI, Python
+- **Blockchain**: Rust, Stylus SDK, Arbitrum, Ethers, Solidity
+- **AI/ML**: DeepAI, Gaia
+- **Game Engines**: Unity (C#), Unreal
+- **Infrastructure**: Render, Vercel
 
-3. **Configure Environment Variables:**  
-   Create a `.env` file in the root directory and add the necessary API keys and blockchain configurations.
+## 📦 Local Installation
 
-4. **Start the Application:**
+### Frontend Setup
+```bash
+# Clone the repository
+git clone https://github.com/dhananjaypai08/ZkDNS.git
 
-   ```bash
-   npm run dev
-   ```
+# Install dependencies
+cd frontend
+npm install
 
-5. **Integrate the SDK:**  
-   Follow the SDK documentation provided in the `/docs` folder to integrate the gameplay data capture plugin into your game.
+# Set up environment variables
+cp .env.example .env
+# Add your configuration
 
-## Contributing
+# Start development server
+npm run dev
+```
 
-We value subtle yet meaningful contributions. To contribute:
-1. Fork the repository.
-2. Create a new branch for your feature or fix.
-3. Commit changes with clear, concise messages.
-4. Open a pull request describing your updates.
+### Backend Setup
+```bash
+# Navigate to backend directory
+cd backend
 
-For more details, please refer to `CONTRIBUTING.md`.
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # or `venv\Scripts\activate` on Windows
 
-## License
+# Install dependencies
+pip install -r requirements.txt
 
-This project is licensed under the MIT License. See the `LICENSE` file for additional details.
+# Set up environment variables
+cp .env.example .env
+# Add your configuration
 
----
+# Start the server
+python3 main.py
+```
 
-BaseArena aspires to gently bridge the gap between innovative gaming, the decentralization of Web3, and the insights of AI agents—providing developers with a subtle yet powerful toolkit to enhance their creations.
+## Partnerships and Integrations
+
+### 1. Arbitrum Integration
+#### Deployment 
+Deployed SBT contract on Arbitrum Sepolia: https://sepolia.arbiscan.io/address/0xF34814Bb28fC0a3076105c509D39edf4Ff00530e
+
+#### Usage 
+Utilized Stylus SDK with erc721.rs for NFT implementation
+Code : https://github.com/dhananjaypai08/ETHArena/blob/master/stylus-contracts/src/erc721.rs
+
+I have a release for the Unity based game here : https://github.com/dhananjaypai08/ETHArena/releases/tag/mac
+
+
+### 2. The Graph Integration
+#### Comprehensive Integration of Multiple Subgraphs 
+
+- Substream-Powered Subgraph
+Query URL: https://api.studio.thegraph.com/query/103194/djsubstream/version/latest
+Real-time entity change monitoring using graph-out method
+
+- Custom Event-Based Subgraph:
+Query URL: https://api.studio.thegraph.com/query/103194/etharenasubgraph/version/latest
+Tracks smart contract events and gameplay metrics
+
+
+- Game Movement Monitoring Subgraph(Existing subgraph):
+Query URL: https://thegraph.com/explorer/subgraphs/Fs8CXT44JRnPrG8ipustHyPwqAg8d3xcgFUW4ogkCb6g
+Analyzes on-chain game interactions
+
+
+#### Technical Excellence
+- Subgraph tracks game movements and on-chain rewards with Gaia Agent at its core 
+- Integration of multiple data sources for comprehensive analytics with Gaia Agent
+- Real-time monitoring system using substream powered subgraph(deployed using github workspace)
+- Custom indexing solutions for gaming metrics
+- AI-powered chatbot utilizing Graph data through RAG
+
+
+### 3. Gaia/Collab.land Integration
+#### Overview
+Our project leverages a custom Gaia node (https://0x0c8923d457934eae1a4ce708f07a980f1ce57a32.gaia.domains/ , node might be stopped) as the core reasoning engine, demonstrating extensive integration capabilities:
+
+
+#### Multi-chain Operations
+- Primary gameplay data on Ethereum
+- Reputation system on Arbitrum Sepolia
+- Cross-chain reward distribution
+
+
+#### Platform Integration
+- Unity Game Engine integration
+- Web client interface
+- On-chain analytics dashboard
+
+
+#### Advanced Agent Capabilities
+- Real-time game movement analysis
+- Text-based RAG for structured data outputs
+- Automated SBT generation and minting
+- Treasury management through smart contracts
+- Social engagement through "cheering" system
+
+I have a release for the Unity based game here : https://github.com/dhananjaypai08/ETHArena/releases/tag/mac
+
+
+
+### 4. Nethermind Integration
+ETHArena revolutionizes the gaming ecosystem by creating an autonomous agent system that bridges the gap between traditional gaming and blockchain technology. Our implementation directly addresses Nethermind's vision of autonomous agents driving on-chain activity.
+
+I have a release for the Unity based game here : https://github.com/dhananjaypai08/ETHArena/releases/tag/mac
+
+### Key Technical Implementations:
+
+#### Innovation Highlights:
+
+- Seamless integration of AI agents with Unity game engine through our custom SDK
+- Account abstraction (ERC2771) for frictionless onboarding of traditional gamers
+Code : 
+https://github.com/dhananjaypai08/ETHArena/blob/master/ETHArenaSDK/main.py#L218
+- Real-time game movement analysis and automated reward distribution
+- Novel approach to gaming reputation through AI-generated "gaming dopplegangers"
+
+Future Roadmap and Starknet Integration:
+- Implementation of StarknetKit for enhanced wallet connectivity
+- Development of smart contracts in Cairo
+
+#### Phase deployment approach to pivot to Nethermind Exosystem:
+- Initial testnet release for validation
+- Subsequent mainnet deployment
+- Integration with Starknet's native agent toolkit
+- Immediate applicability to the $200B+ gaming market
+Clear path to adoption through Unity plugin ecosystem
+Scalable architecture supporting multiple game engines
+- Foundation for future expansion into esports and competitive gaming
+
+
+## 🤝 Contributing
+
+We welcome contributions to ETHArena! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
