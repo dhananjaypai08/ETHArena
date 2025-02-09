@@ -24,7 +24,8 @@ Game-embedded performance tracking meets on-chain rewards, transforming casual p
 
 - Frontend: [ETHArena Platform](https://eth-arena.vercel.app/)
 - Backend: [ETHArena SDK API](https://basearena.onrender.com/)
-- Smart Contract [View on Arbitrum  Etherscan](https://sepolia.arbiscan.io/tx/0x2d097a604a4af24bcc7e801667db4d5acc8da0eca568ad771da71e831733c029)
+- Smart Contract Reputation [View on Arbitrum  Etherscan](https://sepolia.arbiscan.io/tx/0x2d097a604a4af24bcc7e801667db4d5acc8da0eca568ad771da71e831733c029)
+- Smart Contract NFT for Game Assets [View on Arbitrum Etherescan](https://sepolia.arbiscan.io/address/0xee560a20c0215ce431da9e6b2ff3205fd4ed0fb0)
 
 ## 📐 System Architecture
 
@@ -170,13 +171,35 @@ python3 main.py
 
 ### 1. Arbitrum Integration
 #### Deployment 
-Deployed SBT contract on Arbitrum Sepolia: https://sepolia.arbiscan.io/address/0xF34814Bb28fC0a3076105c509D39edf4Ff00530e
+- Stylus based Deployment for NFT : https://sepolia.arbiscan.io/address/0xee560a20c0215ce431da9e6b2ff3205fd4ed0fb0
+
+- Reputation storage on Arbitrum Sepolia: https://sepolia.arbiscan.io/address/0xF34814Bb28fC0a3076105c509D39edf4Ff00530e
+
+### Stylus depployments and check
+1. For deployments checks Locally I have a nitro dev node for contract checks.
+2. Actual deployment is done on Arbitrum sepolia.
+3. Setup for personal deployments : 
+   ```sh 
+   cd stylus-contract
+   cargo stylus check
+
+   cargo stylus deploy --endpoint='YOUR_RPC_ENDPOINT' --private-key="YOUR_PRIVATE_KEY" # deploy the smart contract
+
+   cast send 0xeE560a20c0215ce431da9E6B2FF3205fd4eD0FB0 "mint(address)" <address> --private-key "YOUR_PRIVATE_KEY" --rpc-url "YOUR_RPC_ENDPOINT" #mint the NFT to the given address
+   ```
 
 #### Usage 
-Utilized Stylus SDK with erc721.rs for NFT implementation
+Utilized Stylus SDK with erc721.rs for NFT implementation of the game assets
 Code : https://github.com/dhananjaypai08/ETHArena/blob/master/stylus-contracts/src/erc721.rs
 
 I have a release for the Unity based game here : https://github.com/dhananjaypai08/ETHArena/releases/tag/mac
+
+### Innovation in AI Agents x Gaming x Arbitrum Sepolia
+- Real-time game movement analysis
+- Text-based RAG for structured data outputs
+- Automated NFT generation and minting
+- Treasury management through smart contracts
+- Social engagement through "cheering" system
 
 
 ### 2. The Graph Integration
