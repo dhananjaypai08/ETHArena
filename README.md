@@ -175,7 +175,7 @@ python3 main.py
 
 - Reputation storage on Arbitrum Sepolia: https://sepolia.arbiscan.io/address/0xF34814Bb28fC0a3076105c509D39edf4Ff00530e
 
-### Stylus depployments and check
+### Stylus deployments and check
 1. For deployments checks Locally I have a nitro dev node for contract checks.
 2. Actual deployment is done on Arbitrum sepolia.
 3. Setup for personal deployments : 
