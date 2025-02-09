@@ -1,6 +1,6 @@
 # ETHArena 🎮 
 
-Where Gaming Meets Web3 Evolution. Your AI agent analyzes every move, forges epic moments into NFTs, and guides your path to esports glory. 
+Where Gaming Meets Web3 Evolution. Our AI agent analyzes every move, forges epic moments into NFTs, and guides your path to esports glory. 
 
 Game-embedded performance tracking meets on-chain rewards, transforming casual plays into professional legacies. 🎮
 
