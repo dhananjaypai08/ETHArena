@@ -1,24 +1,23 @@
 [package]
-name = "stylus-contracts"
+name = "stylus-erc721"
 version = "0.1.0"
 edition = "2021"
-license = "MIT OR Apache-2.0"
-keywords = ["arbitrum", "ethereum", "stylus", "alloy"]
 
 [dependencies]
-alloy-primitives = "0.8.14"  # Remove the `features = ["full"]` line
-alloy-sol-types = "0.8.14"   # Ensure this version is compatible
-mini-alloc = "0.7.0"
+alloy-primitives = "0.8.2"
+alloy-sol-types = "0.8.2"
 stylus-sdk = "0.7.0"
-hex = "0.4.3"
+sp-core = { version = "35.0.0", default-features = false }
 
 [dev-dependencies]
 tokio = { version = "1.12.0", features = ["full"] }
 ethers = "2.0"
-eyre = "0.6.8"
 
 [features]
 export-abi = ["stylus-sdk/export-abi"]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
 
 [lib]
 crate-type = ["lib", "cdylib"]
