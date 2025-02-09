@@ -1,6 +1,8 @@
 # ETHArena 🎮 
 
-> Bringing Steam on-chain! Play, earn, and evolve with AI agents that forge your legacy. Your epic gameplay moments transform into unique NFTs while legendary gaming personas become your digital twins. The future of gaming is here—where every move writes your on-chain story.
+ETHArena: Where Gaming Meets Web3 Evolution. Your AI agent analyzes every move, forges epic moments into NFTs, and guides your path to esports glory. 
+
+Game-embedded performance tracking meets on-chain rewards, transforming casual plays into professional legacies. 🎮
 
 ## Table of Contents
 
