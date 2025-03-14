@@ -1,36 +1,42 @@
-name: Release new version 
+name: Release new version
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'  # Triggers on any tag starting with "v", like v1.0.0 or v2.3.1
 
 jobs:
   build:
     name: Build and release
-    runs-on: macos-latest 
+    runs-on: macos-latest
+
     steps:
-      - name: Checkout code 
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup node js 
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Go to frontend directory
-        run: cd Frontend
-      
+      # No need to cd manually, use 'working-directory' instead
       - name: Install Dependencies
         run: npm install
+        working-directory: ./Frontend
 
       - name: Build Project
         run: npm run build
+        working-directory: ./Frontend
 
+      # Create a GitHub release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.ref_name }}  # Use the pushed tag name
+          name: Release ${{ github.ref_name }}  # Set release name as the tag name
+          draft: false  # Set to true if you want to manually review the release
+          prerelease: false  # Set to true if it's a pre-release
           files: |
-            dist/**
+            Frontend/dist/**  # Upload build artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
